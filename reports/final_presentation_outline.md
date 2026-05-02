@@ -32,6 +32,7 @@
 - Segmentation and recommendation
 - Multi-horizon modeling
 - Ablation and calibration
+- Reliability, fairness, and threshold diagnostics
 - Power BI research dashboard
 
 ## Slide 5. EDA Insights
@@ -135,34 +136,66 @@ Key sentence:
   - assessment_discipline
 - Cluster-level recall differences
 
-## Slide 15. Power BI Research Dashboard
+## Slide 15. Reliability and Fairness Diagnostics
 
-- 6 pages:
+- Bootstrap 95% confidence intervals:
+  - Recall CI: `0.9281` to `0.9447`
+  - PR-AUC CI: `0.8673` to `0.8865`
+- Subgroup checks:
+  - recall remains above `0.90` in checked groups
+  - high-IMD group is closest to the recall floor
+
+Key sentence:
+
+> The model is not only accurate on average; it is checked for metric stability and subgroup-level recall before any intervention recommendation.
+
+## Slide 16. Threshold Cost-Benefit
+
+- Selected threshold: `0.25`
+- Review-load implication:
+  - flags about `77.8%` of validation enrollments
+  - catches about `488.6` at-risk learners per `1,000` enrollments
+  - false-alert ratio about `0.59` false positives per true positive
+
+Key sentence:
+
+> In a marketing or learner-retention setting, the threshold is a campaign capacity decision, not only a model metric.
+
+## Slide 17. Power BI Research Dashboard
+
+- 7 pages:
   - Executive Overview
   - Behavior & Outcome Analytics
   - Segmentation & Recommendation Context
   - Multi-Horizon Early Warning
   - Calibration & Model Diagnostics
   - At-Risk Learner Watchlist
+- Advanced page/table set:
+  - confidence intervals
+  - subgroup performance
+  - risk trajectory
+  - threshold cost-benefit
 
-## Slide 16. Managerial Implications
+## Slide 18. Managerial Implications
 
 - Day 7 can be used for early triage
 - Day 30 gives the strongest ranking
 - Critical risk band should be prioritized first
 - Segments help assign differentiated follow-up
+- Threshold choice should reflect advisor capacity
 
-## Slide 17. Limitations and Future Work
+## Slide 19. Limitations and Future Work
 
 - Single dataset
 - At-risk target is broad
 - Recommendation is not causal
+- Subgroup checks are diagnostic, not causal fairness proof
 - Future work:
   - temporal sequence modeling
   - external validation
   - intervention impact evaluation
 
-## Slide 18. Conclusion
+## Slide 20. Conclusion
 
 - The project moved from a static classifier to a research-grade early-warning study
 - It links:
@@ -172,3 +205,4 @@ Key sentence:
   - multi-horizon prediction
   - calibration
   - intervention prioritization
+  - capacity-aware targeting

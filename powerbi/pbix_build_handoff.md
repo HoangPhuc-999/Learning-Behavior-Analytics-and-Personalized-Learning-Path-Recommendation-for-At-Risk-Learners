@@ -15,6 +15,7 @@ The repository now contains all source artifacts needed to assemble the research
 - KPI definitions
 - page-level visual logic
 - wireframe screenshots
+- advanced reliability and campaign-capacity CSVs
 
 ## What still requires Power BI Desktop
 
@@ -23,6 +24,7 @@ The repository now contains all source artifacts needed to assemble the research
 - page layout polish
 - slicer interactions
 - final theme and formatting
+- optional page 7 build for confidence intervals, subgroup diagnostics, risk trajectory, and threshold cost-benefit
 
 ## Recommended build order
 
@@ -30,7 +32,25 @@ The repository now contains all source artifacts needed to assemble the research
 2. Build the relationships from `dashboard_data_dictionary.md`
 3. Create KPI measures first
 4. Build page 4 and page 5 first because they hold the core research value
-5. Finish with page 6 watchlist and page 1 overview
+5. Build page 7 next because it proves reliability, subgroup awareness, and campaign-capacity thinking
+6. Finish with page 6 watchlist and page 1 overview
+
+## Advanced Table Refresh
+
+Run this after modeling outputs are regenerated:
+
+```bash
+make advanced-dashboard
+```
+
+This refreshes:
+
+- `champion_metric_bootstrap_ci.csv`
+- `subgroup_model_performance.csv`
+- `risk_signal_trajectory.csv`
+- `threshold_cost_benefit.csv`
+
+Use `powerbi/dax_measure_catalog.md` for the recommended Power BI measures.
 
 ## Naming
 

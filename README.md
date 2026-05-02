@@ -1,15 +1,16 @@
 # Learning Behavior Analytics and Multi-Horizon Early Warning for At-Risk Learners
 
-This project uses the OULAD dataset to build an end-to-end learning analytics pipeline at the `learner + module + presentation` grain. The final deliverable is no longer just a day-30 classifier. It is a **research-focused early-warning system** with multi-horizon feature engineering, segmentation, recommendation, ablation analysis, calibration analysis, and Power BI handoff artifacts.
+This project uses the OULAD dataset to build an end-to-end learning analytics pipeline at the `learner + module + presentation` grain. The final deliverable is no longer just a day-30 classifier. It is a **data-driven marketing decision system** for learner retention, combining behavior analytics, segmentation, recommendation, multi-horizon early warning, calibration, fairness diagnostics, threshold cost-benefit analysis, and Power BI handoff artifacts.
 
 ## What Makes This Version Different
 
-The project now answers four stronger questions:
+The project now answers five stronger questions:
 
 1. How early can at-risk learners be identified at `day 7`, `14`, `21`, and `30`?
 2. Which horizon-model pair is strongest once recall-oriented thresholding is enforced?
 3. Which feature groups actually create the predictive lift?
 4. Are the predicted probabilities reliable enough to support risk-banded intervention?
+5. Which learner groups and intervention thresholds deserve extra review before a real retention campaign?
 
 ## Key Results
 
@@ -28,11 +29,18 @@ The project now answers four stronger questions:
   - test F2: `0.8540`
   - test ROC-AUC: `0.8467`
   - test PR-AUC: `0.8766`
+- Bootstrap stability on the held-out test set:
+  - recall 95% CI: `0.9281` to `0.9447`
+  - PR-AUC 95% CI: `0.8673` to `0.8865`
 - Final risk bands on the held-out test set:
   - `Low`: actual at-risk rate `15.4%`
   - `Medium`: `35.3%`
   - `High`: `62.2%`
   - `Critical`: `92.5%`
+- Threshold cost-benefit at the selected validation threshold `0.25`:
+  - flags about `77.8%` of the validation cohort
+  - catches about `488.6` at-risk learners per `1,000` enrollments
+  - false-alert ratio: about `0.59` false positives per true positive
 
 ## Segmentation and Recommendation Highlights
 
@@ -112,18 +120,50 @@ The project now exports:
 
 This makes the system more useful operationally because intervention prioritization depends on probability quality, not only on binary flags.
 
+### 5. Reliability, subgroup, and explainability diagnostics
+
+Notebook `06` now adds a final evidence layer for a stronger Data-Driven Marketing defense:
+
+- bootstrap confidence intervals for champion metrics,
+- subgroup performance slices by gender, disability, deprivation band, and prior attempts,
+- risk-signal trajectories from day 7 to day 30,
+- threshold cost-benefit curves for review-load planning,
+- SHAP explainability with a fallback to native XGBoost importance.
+
+The repo also exports these Power BI-ready advanced tables:
+
+- `champion_metric_bootstrap_ci.csv`
+- `subgroup_model_performance.csv`
+- `risk_signal_trajectory.csv`
+- `threshold_cost_benefit.csv`
+
+### 6. Marketing decision framing
+
+The analytical output maps directly to a retention and engagement campaign workflow:
+
+1. identify high-risk learners early,
+2. prioritize outreach using calibrated risk bands,
+3. personalize intervention by segment and recommended path,
+4. tune thresholds based on advisor capacity,
+5. monitor subgroup performance before operational rollout.
+
 ## Repository Map
 
 - `notebooks/01_*.ipynb` to `06_*.ipynb`: full analysis pipeline
 - `src/features/multi_horizon_feature_store.py`: reusable horizon feature engineering logic
+- `src/features/advanced_dashboard_tables.py`: dashboard-ready reliability, subgroup, trajectory, and threshold tables
 - `src/models/multi_horizon_early_warning.py`: reusable multi-horizon modeling logic
 - `data/processed/`: all exported modeling, recommendation, and dashboard tables
 - `reports/final_report_handoff.md`: report-ready storyline and defense notes
 - `reports/demo_talk_track.md`: short demo script
 - `reports/final_presentation_outline.md`: final slide structure
+- `reports/final_submission_checklist.md`: final readiness checklist for submission and defense
+- `reports/grading_rubric_alignment.md`: project strengths mapped to likely grading criteria
 - `powerbi/dashboard_storyboard.md`: research dashboard page plan
 - `powerbi/dashboard_data_dictionary.md`: dashboard source and field guide
+- `powerbi/dax_measure_catalog.md`: DAX measure catalog for the Power BI build
 - `powerbi/dashboard_screenshot_pack/`: research dashboard wireframes
+- `requirements-optional.txt`: optional SHAP dependency for richer explainability plots
 
 ## Main Exported Artifacts
 
@@ -163,6 +203,10 @@ This makes the system more useful operationally because intervention prioritizat
 - `error_analysis_samples.csv`
 - `segment_model_performance.csv`
 - `outcome_risk_summary.csv`
+- `champion_metric_bootstrap_ci.csv`
+- `subgroup_model_performance.csv`
+- `risk_signal_trajectory.csv`
+- `threshold_cost_benefit.csv`
 
 ## How to Reproduce
 
@@ -170,6 +214,12 @@ This makes the system more useful operationally because intervention prioritizat
 
 ```bash
 pip install -r requirements.txt
+```
+
+For the optional SHAP explainability section in notebook `06`:
+
+```bash
+pip install -r requirements-optional.txt
 ```
 
 ### 2. Pull the full raw dataset
@@ -197,6 +247,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/06_at_risk_modelin
 ```bash
 make feature-store
 make modeling
+make advanced-dashboard
 make research
 make validate
 make test
@@ -204,6 +255,7 @@ make test-notebooks
 ```
 
 - `make validate` checks the exported research artifacts against the acceptance criteria
+- `make advanced-dashboard` refreshes the advanced Power BI-ready tables
 - `make test` runs the unit and acceptance tests
 - `make test-notebooks` runs notebook smoke tests for notebooks `04` and `06`
 
@@ -214,7 +266,8 @@ The repository includes the full research dashboard handoff:
 - updated storyboard,
 - data dictionary,
 - page-level wireframes in `powerbi/dashboard_screenshot_pack/`,
-- reporting-ready CSV outputs.
+- reporting-ready CSV outputs,
+- advanced dashboard CSVs for reliability, subgroup fairness, trajectory, and threshold cost-benefit pages.
 
 The `.pbix` file itself must be assembled in Power BI Desktop from these exported tables.
 
@@ -222,7 +275,7 @@ The `.pbix` file itself must be assembled in Power BI Desktop from these exporte
 
 Most student projects stop at a single static classifier. This one now gives a full decision-relevant chain:
 
-`behavior -> segmentation -> recommendation -> multi-horizon early warning -> calibration -> risk bands`
+`behavior -> segmentation -> recommendation -> multi-horizon early warning -> calibration -> risk bands -> capacity-aware intervention`
 
 That makes it defensible as both:
 

@@ -1,0 +1,3 @@
+# Optional explainability dependency for the SHAP section in notebook 06.
+# The notebook still runs without this package and falls back to native XGBoost importance.
+shap

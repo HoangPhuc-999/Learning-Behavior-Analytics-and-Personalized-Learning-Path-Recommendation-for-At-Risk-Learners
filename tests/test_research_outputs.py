@@ -30,6 +30,16 @@ class ResearchOutputValidationTests(unittest.TestCase):
         self.assertTrue(self.summary.risk_band_summary["actual_at_risk_rate"].is_monotonic_increasing)
         self.assertTrue(self.summary.risk_band_summary["average_predicted_probability"].is_monotonic_increasing)
 
+    def test_advanced_dashboard_tables_are_present(self) -> None:
+        expected_tables = {
+            "champion_metric_bootstrap_ci.csv",
+            "subgroup_model_performance.csv",
+            "risk_signal_trajectory.csv",
+            "threshold_cost_benefit.csv",
+        }
+        self.assertEqual(set(self.summary.advanced_table_shapes["table"]), expected_tables)
+        self.assertTrue((self.summary.advanced_table_shapes["rows"] > 0).all())
+
 
 if __name__ == "__main__":
     unittest.main()

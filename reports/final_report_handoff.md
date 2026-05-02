@@ -4,13 +4,13 @@ This file turns notebooks `01` to `06` into a report-ready narrative for the upg
 
 The new storyline is:
 
-`behavior analytics -> segmentation -> recommendation -> multi-horizon early warning -> ablation -> calibration -> intervention watchlist`
+`behavior analytics -> segmentation -> recommendation -> multi-horizon early warning -> ablation -> calibration -> reliability diagnostics -> intervention watchlist`
 
 ## 1. Executive Summary
 
 Use this as the opening paragraph:
 
-> This project analyzes learner behavior in the OULAD dataset and develops a research-focused framework for segmentation, personalized recommendation, and early identification of at-risk learners. The final pipeline uses 32,593 enrollment records and compares early-warning models at day 7, 14, 21, and 30. Results show that useful recall is already achievable at day 7, but predictive ranking quality improves materially as more course history becomes available. The final champion pair is an XGBoost model at day 30 with a recall-oriented threshold of 0.25, while calibration and risk-band analysis show that the predicted probabilities are operationally meaningful for intervention prioritization.
+> This project analyzes learner behavior in the OULAD dataset and develops a research-focused framework for segmentation, personalized recommendation, and early identification of at-risk learners. The final pipeline uses 32,593 enrollment records and compares early-warning models at day 7, 14, 21, and 30. Results show that useful recall is already achievable at day 7, but predictive ranking quality improves materially as more course history becomes available. The final champion pair is an XGBoost model at day 30 with a recall-oriented threshold of 0.25, while calibration, confidence intervals, subgroup diagnostics, and threshold cost-benefit analysis show how the output can support a capacity-aware learner retention campaign.
 
 ## 2. Project Scope
 
@@ -294,37 +294,90 @@ Suggested interpretation:
 
 > The model is strongest in clearly vulnerable clusters and weaker in the more ambiguous high-functioning group. That is acceptable for an early-warning system designed to catch disengagement aggressively.
 
-## 12. Managerial Implications
+## 12. Reliability and Marketing Deployment Diagnostics
 
-### 12.1 For instructors
+These sections strengthen the project beyond a normal classifier by showing whether the model can support an actual data-driven marketing or learner retention workflow.
+
+### 12.1 Bootstrap confidence intervals
+
+Use these held-out test-set intervals:
+
+| Metric | Point estimate | 95% CI lower | 95% CI upper |
+|---|---:|---:|---:|
+| Precision | `0.6313` | `0.6173` | `0.6442` |
+| Recall | `0.9367` | `0.9281` | `0.9447` |
+| F1 | `0.7542` | `0.7435` | `0.7648` |
+| ROC-AUC | `0.8467` | `0.8369` | `0.8559` |
+| PR-AUC | `0.8766` | `0.8673` | `0.8865` |
+
+Interpretation:
+
+> The confidence intervals are narrow enough to support the claim that the champion model is stable on the held-out test set, especially for recall and PR-AUC.
+
+### 12.2 Subgroup and fairness checks
+
+Use these points:
+
+- Recall stays above the `0.90` target across gender, disability, IMD, and prior-attempt slices.
+- The high-IMD group is closest to the recall floor at about `0.9040`, so it should be monitored if the system is used operationally.
+- Re-attempt learners show weaker ROC-AUC at about `0.7625`, which suggests that ranking quality is less stable for this subgroup even though recall is high.
+
+Suggested wording:
+
+> The model does not show an immediate recall failure in the checked subgroups, but the diagnostic table identifies where monitoring should focus before any real intervention rollout.
+
+### 12.3 Risk trajectory and threshold cost-benefit
+
+Use these points:
+
+- The risk-signal trajectory shows that at-risk and non-at-risk learners already separate by day 7 on engagement and risk-index features.
+- The selected threshold `0.25` preserves high recall but flags about `77.8%` of the validation cohort.
+- This creates an advisor-capacity trade-off: a stricter threshold reduces review load but misses more at-risk learners.
+
+Suggested wording:
+
+> In marketing terms, the model creates a targeting list, but threshold choice is a campaign-capacity decision. The dashboard therefore reports both predictive quality and expected review load.
+
+### 12.4 SHAP explainability
+
+Notebook `06` retrains the champion XGBoost model and produces SHAP outputs when the optional `shap` package is installed. Use this as an advanced interpretability point:
+
+> SHAP supports individual-level explanations for advisor dashboards, while the fallback native importance keeps the notebook reproducible even without optional dependencies.
+
+## 13. Managerial Implications
+
+### 13.1 For instructors
 
 - Treat `day 7` as the earliest viable warning checkpoint
 - Treat `day 30` as the strongest ranking checkpoint
 - Prioritize `Inactive Drop-offs` and `Sporadic Explorers` for intervention
 - Use recommendation paths to assign differentiated next actions
 
-### 12.2 For program managers
+### 13.2 For program managers
 
 - Compare module-level risk burden before assigning support resources
 - Use the risk bands instead of a single yes/no flag when triaging learners
 - Monitor the `Critical` risk band first because its realized at-risk rate is already above `92%`
+- Tune the operating threshold based on available advisor capacity
 
-### 12.3 For platform design
+### 13.3 For platform design
 
 - Push engagement prompts very early
 - Surface assessment actions more visibly
 - Reduce delays between weak early behavior and instructor outreach
+- Track subgroup performance after deployment to avoid hidden targeting gaps
 
-## 13. Limitations
+## 14. Limitations
 
 Use these points:
 
 - The target combines `Fail` and `Withdrawn`, which is useful operationally but broad
 - Recommendations are prototype-based rather than causal
 - Calibration is evaluated on one dataset only
+- Subgroup diagnostics are observational fairness checks, not proof of causal fairness
 - External validation would still be needed before production deployment
 
-## 14. Suggested Report Structure
+## 15. Suggested Report Structure
 
 1. Introduction
 2. Research objectives and questions
@@ -335,11 +388,13 @@ Use these points:
 7. Segmentation and personalized recommendation
 8. Multi-horizon at-risk modeling
 9. Ablation and calibration analysis
-10. Managerial implications
-11. Limitations and future work
-12. Conclusion
+10. Reliability, subgroup, and explainability diagnostics
+11. Power BI dashboard and intervention design
+12. Managerial implications
+13. Limitations and future work
+14. Conclusion
 
-## 15. Defense Q&A
+## 16. Defense Q&A
 
 ### Why not use threshold `0.50`?
 
@@ -364,3 +419,15 @@ It proves that demographics alone are weak, while the combination of engagement 
 ### Why add calibration and risk bands?
 
 Because interventions are prioritized by risk level, not only by hard class labels. Calibration shows whether the probabilities are trustworthy enough to support that prioritization.
+
+### Why add confidence intervals?
+
+Because single test-set metrics can look stronger or weaker by sampling chance. Bootstrap confidence intervals show whether the champion performance is stable enough to defend.
+
+### Why include subgroup analysis?
+
+Because a retention model can perform well on average while under-serving a subgroup. The checked subgroup recalls remain above the target, but the high-IMD and re-attempt diagnostics deserve monitoring.
+
+### Why is threshold choice a marketing decision?
+
+Because threshold choice controls the size of the outreach list. A lower threshold catches more at-risk learners but creates more false alerts and advisor workload.

@@ -33,20 +33,26 @@ def main() -> int:
     root = find_repo_root()
     sys.path.append(str(root))
 
-    from src.features import build_multi_horizon_feature_store
+    from src.features import build_advanced_dashboard_tables, build_multi_horizon_feature_store
     from src.models import run_multi_horizon_study
     from src.validation import validate_research_outputs
 
     processed_dir = root / "data" / "processed"
 
-    print("Step 1/2 - building multi-horizon feature store...")
+    print("Step 1/3 - building multi-horizon feature store...")
     build_multi_horizon_feature_store(
         processed_dir=processed_dir,
         write_outputs=not args.no_write,
     )
 
-    print("Step 2/2 - running multi-horizon modeling study...")
+    print("Step 2/3 - running multi-horizon modeling study...")
     outputs = run_multi_horizon_study(
+        processed_dir=processed_dir,
+        write_outputs=not args.no_write,
+    )
+
+    print("Step 3/3 - exporting advanced dashboard tables...")
+    build_advanced_dashboard_tables(
         processed_dir=processed_dir,
         write_outputs=not args.no_write,
     )
@@ -60,6 +66,8 @@ def main() -> int:
         print("Running acceptance checks...")
         summary = validate_research_outputs(processed_dir)
         print(summary.horizon_shapes.to_string(index=False))
+        print()
+        print(summary.advanced_table_shapes.to_string(index=False))
         print()
         print(summary.champion_metrics.to_string(index=False))
 

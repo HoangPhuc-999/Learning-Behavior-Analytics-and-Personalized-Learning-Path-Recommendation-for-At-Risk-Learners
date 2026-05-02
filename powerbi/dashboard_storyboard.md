@@ -2,7 +2,7 @@
 
 This storyboard rebuilds the dashboard around the upgraded project direction:
 
-`behavior evidence -> segmentation context -> multi-horizon early warning -> calibration -> watchlist`
+`behavior evidence -> segmentation context -> multi-horizon early warning -> calibration -> watchlist -> campaign capacity`
 
 The dashboard is no longer framed as a product demo. It is a **research dashboard** that supports evidence, explanation, and intervention prioritization.
 
@@ -29,6 +29,10 @@ Import these tables into Power BI:
 - `model_feature_importance.csv`
 - `segment_model_performance.csv`
 - `outcome_risk_summary.csv`
+- `champion_metric_bootstrap_ci.csv`
+- `subgroup_model_performance.csv`
+- `risk_signal_trajectory.csv`
+- `threshold_cost_benefit.csv`
 
 ## 2. Relationship Logic
 
@@ -60,6 +64,10 @@ Profile / summary tables:
 - `model_feature_importance`
 - `segment_model_performance`
 - `outcome_risk_summary`
+- `champion_metric_bootstrap_ci`
+- `subgroup_model_performance`
+- `risk_signal_trajectory`
+- `threshold_cost_benefit`
 
 ## 3. Core Measures
 
@@ -75,10 +83,13 @@ Champion Precision = MAX(champion_test_metrics[precision])
 Champion Recall = MAX(champion_test_metrics[recall])
 Champion PR AUC = MAX(champion_test_metrics[pr_auc])
 Champion ROC AUC = MAX(champion_test_metrics[roc_auc])
+Champion Recall CI Lower = CALCULATE(MAX(champion_metric_bootstrap_ci[ci_95_lower]), champion_metric_bootstrap_ci[metric] = "recall")
+Champion Recall CI Upper = CALCULATE(MAX(champion_metric_bootstrap_ci[ci_95_upper]), champion_metric_bootstrap_ci[metric] = "recall")
 
 Avg Risk Probability = AVERAGE(champion_test_predictions[risk_probability])
 Critical Risk Learners = CALCULATE(COUNTROWS(risk_band_test_predictions), risk_band_test_predictions[risk_band] = "Critical")
 Earliest Useful Horizon = MINX(FILTER(selected_operating_points, selected_operating_points[is_earliest_useful_horizon] = TRUE()), selected_operating_points[horizon_day])
+Selected Review Load per 1000 = CALCULATE(MAX(threshold_cost_benefit[expected_review_load_per_1000]), threshold_cost_benefit[selected_operating_point] = TRUE())
 ```
 
 ## 4. Page 1 - Executive Overview
@@ -293,7 +304,57 @@ Turn the research output into a prioritized learner table for review.
 
 > The dashboard does not stop at prediction. It organizes the final output into a triage list that combines risk level, learner segment, and recommended path.
 
-## 10. Recommended Slicers
+## 10. Page 7 - Reliability & Campaign Capacity
+
+### Business purpose
+
+Show that the early-warning output is stable, subgroup-aware, and usable for advisor-capacity planning.
+
+### KPI cards
+
+- Recall 95% CI lower and upper
+- PR-AUC 95% CI lower and upper
+- Selected review load per 1,000 enrollments
+- Selected false-alert ratio
+- Number of subgroup rows flagged for review
+
+### Suggested visuals
+
+1. Bootstrap confidence interval bar chart:
+   - `metric`
+   - `point_estimate`
+   - `ci_95_lower`
+   - `ci_95_upper`
+2. Subgroup performance matrix:
+   - `subgroup`
+   - `group`
+   - `n`
+   - `recall`
+   - `precision`
+   - `roc_auc`
+   - `review_flag`
+3. Risk trajectory line chart:
+   - `horizon_day`
+   - `mean`
+   - legend by `group`
+   - small multiples by `feature_label`
+4. Threshold cost-benefit chart:
+   - threshold on x-axis
+   - `recall`, `precision`, and `expected_review_load_per_1000`
+   - marker for `selected_operating_point`
+
+### Source tables
+
+- `champion_metric_bootstrap_ci`
+- `subgroup_model_performance`
+- `risk_signal_trajectory`
+- `threshold_cost_benefit`
+
+### Key message
+
+> The model is evaluated as a deployable retention-targeting system, not only as an offline classifier. Threshold choice controls campaign size, while subgroup diagnostics identify where monitoring should focus.
+
+## 11. Recommended Slicers
 
 Use these slicers consistently:
 
@@ -304,8 +365,10 @@ Use these slicers consistently:
 - `final_result`
 - `risk_band`
 - `recommended_path`
+- `metric`
+- `subgroup`
 
-## 11. Design Notes
+## 12. Design Notes
 
 Keep the dashboard analytical:
 
@@ -314,6 +377,8 @@ Keep the dashboard analytical:
 - fixed KPI row on top
 - consistent red family for risk
 - teal or blue-green for recommendation visuals
+- neutral blue for reliability diagnostics
+- amber for review-load and threshold trade-off visuals
 - one key message per page
 
 Suggested outcome colors:
@@ -323,7 +388,7 @@ Suggested outcome colors:
 - `Fail`: orange
 - `Withdrawn`: red
 
-## 12. Presentation Flow
+## 13. Presentation Flow
 
 Use this order while presenting:
 
@@ -333,3 +398,4 @@ Use this order while presenting:
 4. Multi-horizon comparison
 5. Calibration and ablation
 6. Watchlist and intervention relevance
+7. Reliability, subgroup checks, and campaign-capacity trade-off

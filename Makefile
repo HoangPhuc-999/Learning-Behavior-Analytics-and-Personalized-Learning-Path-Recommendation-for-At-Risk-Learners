@@ -1,10 +1,13 @@
-.PHONY: feature-store modeling research validate test test-notebooks
+.PHONY: feature-store modeling advanced-dashboard research validate test test-notebooks
 
 feature-store:
 	python scripts/run_feature_store.py
 
 modeling:
 	python scripts/run_multi_horizon_modeling.py
+
+advanced-dashboard:
+	python scripts/export_advanced_dashboard_tables.py
 
 research:
 	python scripts/run_research_pipeline.py

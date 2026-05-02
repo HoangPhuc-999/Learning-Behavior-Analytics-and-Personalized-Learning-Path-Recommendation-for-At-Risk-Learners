@@ -16,12 +16,72 @@ EXPECTED_ABLATION_GROUPS = (
     "full feature set",
 )
 EXPECTED_RISK_BANDS = ("Low", "Medium", "High", "Critical")
+ADVANCED_TABLE_SCHEMAS = {
+    "champion_metric_bootstrap_ci.csv": {
+        "metric",
+        "point_estimate",
+        "ci_95_lower",
+        "ci_95_upper",
+        "bootstrap_mean",
+        "bootstrap_std",
+        "n_boot",
+        "random_state",
+    },
+    "subgroup_model_performance.csv": {
+        "subgroup",
+        "group",
+        "n",
+        "at_risk_rate",
+        "recall",
+        "precision",
+        "f1",
+        "roc_auc",
+        "recall_gap_to_target",
+        "review_flag",
+    },
+    "risk_signal_trajectory.csv": {
+        "horizon_day",
+        "feature",
+        "feature_label",
+        "group",
+        "at_risk",
+        "mean",
+        "sem",
+        "n",
+    },
+    "threshold_cost_benefit.csv": {
+        "threshold",
+        "accuracy",
+        "precision",
+        "recall",
+        "f1",
+        "f2",
+        "roc_auc",
+        "pr_auc",
+        "brier_score",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+        "horizon_day",
+        "model",
+        "total_flagged",
+        "flagged_pct",
+        "false_alert_ratio",
+        "missed_at_risk",
+        "expected_review_load_per_1000",
+        "caught_at_risk_per_1000",
+        "selected_operating_point",
+        "target_recall_met",
+    },
+}
 
 
 @dataclass
 class ResearchValidationSummary:
     processed_dir: Path
     horizon_shapes: pd.DataFrame
+    advanced_table_shapes: pd.DataFrame
     model_pair_count: int
     ablation_row_count: int
     champion_metrics: pd.DataFrame
@@ -50,6 +110,10 @@ def validate_research_outputs(processed_dir: Path) -> ResearchValidationSummary:
         "risk_band_test_predictions.csv",
         "model_feature_importance.csv",
         "error_analysis_samples.csv",
+        "champion_metric_bootstrap_ci.csv",
+        "subgroup_model_performance.csv",
+        "risk_signal_trajectory.csv",
+        "threshold_cost_benefit.csv",
     ] + [f"features_prediction_day{h:02d}.csv" for h in EXPECTED_HORIZONS]
 
     missing_files = [name for name in required_files if not (processed_dir / name).exists()]
@@ -146,12 +210,47 @@ def validate_research_outputs(processed_dir: Path) -> ResearchValidationSummary:
     if not error_samples.empty:
         _expect(error_samples["prediction_outcome"].isin({"False Positive", "False Negative"}).all(), "error_analysis_samples.csv must only contain false positives and false negatives")
 
+    # Advanced dashboard tables
+    advanced_table_rows: list[dict[str, int]] = []
+    for table_name, required_columns in ADVANCED_TABLE_SCHEMAS.items():
+        advanced_df = pd.read_csv(processed_dir / table_name, low_memory=False)
+        advanced_table_rows.append({"table": table_name, "rows": len(advanced_df), "columns": advanced_df.shape[1]})
+        _expect(not advanced_df.empty, f"{table_name} must not be empty")
+        missing_columns = required_columns.difference(advanced_df.columns)
+        _expect(not missing_columns, f"{table_name} is missing required columns: {sorted(missing_columns)}")
+
+    bootstrap_ci = pd.read_csv(processed_dir / "champion_metric_bootstrap_ci.csv", low_memory=False)
+    _expect(set(bootstrap_ci["metric"]) == {"precision", "recall", "f1", "roc_auc", "pr_auc"}, "champion_metric_bootstrap_ci.csv is missing expected metrics")
+    _expect(bootstrap_ci[["point_estimate", "ci_95_lower", "ci_95_upper", "bootstrap_mean"]].notna().all().all(), "Bootstrap metric estimates must not contain nulls")
+    _expect((bootstrap_ci["ci_95_lower"] <= bootstrap_ci["point_estimate"]).all(), "Bootstrap CI lower bound exceeds point estimate")
+    _expect((bootstrap_ci["point_estimate"] <= bootstrap_ci["ci_95_upper"]).all(), "Bootstrap CI upper bound is below point estimate")
+    _expect(bootstrap_ci["n_boot"].gt(0).all(), "Bootstrap sample counts must be positive")
+
+    subgroup_performance = pd.read_csv(processed_dir / "subgroup_model_performance.csv", low_memory=False)
+    _expect(subgroup_performance["subgroup"].isin({"Gender", "Disability", "IMD deprivation", "Prior attempts"}).all(), "subgroup_model_performance.csv contains unexpected subgroup labels")
+    subgroup_rates = subgroup_performance[["at_risk_rate", "recall", "precision", "f1"]]
+    _expect((subgroup_rates.ge(0) & subgroup_rates.le(1)).all().all(), "Subgroup rate and classification metrics must stay within [0, 1]")
+    _expect((subgroup_performance["review_flag"] == (subgroup_performance["recall"] < 0.90)).all(), "Subgroup review_flag must match the 0.90 recall target")
+
+    trajectory = pd.read_csv(processed_dir / "risk_signal_trajectory.csv", low_memory=False)
+    _expect(set(trajectory["horizon_day"].dropna().astype(int)) == set(EXPECTED_HORIZONS), "risk_signal_trajectory.csv must cover all horizons")
+    _expect({"Non at-risk", "At-risk", "Gap: at-risk minus non at-risk"}.issubset(set(trajectory["group"])), "risk_signal_trajectory.csv is missing required trajectory groups")
+    _expect(trajectory.loc[trajectory["group"] != "Gap: at-risk minus non at-risk", "n"].gt(0).all(), "Risk trajectory non-gap rows must have positive sample counts")
+
+    cost_benefit = pd.read_csv(processed_dir / "threshold_cost_benefit.csv", low_memory=False)
+    _expect(cost_benefit["selected_operating_point"].sum() == 1, "threshold_cost_benefit.csv must flag exactly one selected operating point")
+    _expect(cost_benefit["target_recall_met"].any(), "threshold_cost_benefit.csv must contain at least one threshold that meets target recall")
+    _expect(cost_benefit["threshold"].is_monotonic_increasing, "threshold_cost_benefit.csv thresholds must be sorted ascending")
+    threshold_rates = cost_benefit[["flagged_pct", "recall", "precision"]]
+    _expect((threshold_rates.ge(0) & threshold_rates.le(1)).all().all(), "Threshold rate and classification metrics must stay within [0, 1]")
+    _expect(cost_benefit.loc[cost_benefit["selected_operating_point"], "target_recall_met"].all(), "Selected operating point must meet target recall")
+
     return ResearchValidationSummary(
         processed_dir=processed_dir,
         horizon_shapes=horizon_shapes,
+        advanced_table_shapes=pd.DataFrame(advanced_table_rows),
         model_pair_count=len(comparison_pairs),
         ablation_row_count=len(ablation),
         champion_metrics=champion_metrics,
         risk_band_summary=risk_band_summary,
     )
-

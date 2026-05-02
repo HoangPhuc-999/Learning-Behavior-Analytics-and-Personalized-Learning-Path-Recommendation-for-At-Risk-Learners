@@ -230,6 +230,63 @@ Use this composite key across the dashboard:
   - `predicted_positive_rate`
   - `average_risk_probability`
 
+### `champion_metric_bootstrap_ci.csv`
+
+- Grain: champion metric
+- Purpose: show metric stability with bootstrap confidence intervals
+- Key fields:
+  - `metric`
+  - `point_estimate`
+  - `ci_95_lower`
+  - `ci_95_upper`
+  - `bootstrap_std`
+  - `n_boot`
+
+### `subgroup_model_performance.csv`
+
+- Grain: subgroup group
+- Purpose: check champion model recall and ranking quality across observable learner groups
+- Key fields:
+  - `subgroup`
+  - `group`
+  - `n`
+  - `at_risk_rate`
+  - `recall`
+  - `precision`
+  - `roc_auc`
+  - `recall_gap_to_target`
+  - `review_flag`
+
+### `risk_signal_trajectory.csv`
+
+- Grain: horizon-feature-group
+- Purpose: compare how behavioral signals separate at-risk and non-at-risk learners from day 7 to day 30
+- Key fields:
+  - `horizon_day`
+  - `feature`
+  - `feature_label`
+  - `group`
+  - `mean`
+  - `sem`
+  - `n`
+
+### `threshold_cost_benefit.csv`
+
+- Grain: threshold for the final champion pair
+- Purpose: support advisor-capacity and campaign-size trade-off decisions
+- Key fields:
+  - `threshold`
+  - `recall`
+  - `precision`
+  - `f2`
+  - `total_flagged`
+  - `flagged_pct`
+  - `false_alert_ratio`
+  - `expected_review_load_per_1000`
+  - `caught_at_risk_per_1000`
+  - `selected_operating_point`
+  - `target_recall_met`
+
 ## 4. Suggested Page-to-Table Mapping
 
 ### Executive Overview
@@ -270,6 +327,13 @@ Use this composite key across the dashboard:
 - `champion_test_predictions`
 - `risk_band_test_predictions`
 - `segment_model_performance`
+
+### Reliability & Campaign Capacity
+
+- `champion_metric_bootstrap_ci`
+- `subgroup_model_performance`
+- `risk_signal_trajectory`
+- `threshold_cost_benefit`
 
 ## 5. Build Note
 

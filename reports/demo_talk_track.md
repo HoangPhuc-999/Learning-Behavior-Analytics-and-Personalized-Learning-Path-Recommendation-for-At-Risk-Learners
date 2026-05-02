@@ -38,6 +38,10 @@ This is a short speaking script for demoing the upgraded project in 5 to 7 minut
 
 > I also added ablation and calibration. Ablation shows that engagement plus assessment features create most of the predictive value, while demographics alone are weak. Calibration and risk bands show that the predicted probabilities are ordered well enough to support intervention tiers like Low, Medium, High, and Critical risk.
 
-## 10. Close
+## 10. Reliability and Marketing Deployment
 
-> So the final contribution is not just a classifier. It is a full early-warning research pipeline that explains learner behavior, segments learner types, recommends next actions, compares early-warning horizons, and translates model output into practical risk bands for intervention.
+> The final notebook also checks whether the model is stable and usable for a real retention workflow. Bootstrap confidence intervals show that recall and PR-AUC are stable on the test set, subgroup analysis checks whether recall drops for observable groups, and threshold cost-benefit analysis shows how many learners would need advisor review at each threshold.
+
+## 11. Close
+
+> So the final contribution is not just a classifier. It is a full early-warning research pipeline that explains learner behavior, segments learner types, recommends next actions, compares early-warning horizons, and translates model output into practical risk bands and capacity-aware targeting decisions.
