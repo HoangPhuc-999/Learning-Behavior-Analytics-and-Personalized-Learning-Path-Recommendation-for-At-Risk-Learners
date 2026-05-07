@@ -40,6 +40,18 @@ class ResearchOutputValidationTests(unittest.TestCase):
         self.assertEqual(set(self.summary.advanced_table_shapes["table"]), expected_tables)
         self.assertTrue((self.summary.advanced_table_shapes["rows"] > 0).all())
 
+    def test_ab_testing_tables_are_present(self) -> None:
+        expected_tables = {
+            "ab_test_experiment_design.csv",
+            "ab_test_assignment.csv",
+            "ab_test_srm_check.csv",
+            "ab_test_balance.csv",
+            "ab_test_power_analysis.csv",
+            "ab_test_simulated_results.csv",
+        }
+        self.assertEqual(set(self.summary.ab_test_table_shapes["table"]), expected_tables)
+        self.assertTrue((self.summary.ab_test_table_shapes["rows"] > 0).all())
+
 
 if __name__ == "__main__":
     unittest.main()

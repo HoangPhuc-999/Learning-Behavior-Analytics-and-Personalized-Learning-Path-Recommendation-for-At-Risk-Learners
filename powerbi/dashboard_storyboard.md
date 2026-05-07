@@ -2,7 +2,7 @@
 
 This storyboard rebuilds the dashboard around the upgraded project direction:
 
-`behavior evidence -> segmentation context -> multi-horizon early warning -> calibration -> watchlist -> campaign capacity`
+`behavior evidence -> segmentation context -> multi-horizon early warning -> calibration -> watchlist -> campaign capacity -> A/B experiment readiness`
 
 The dashboard is no longer framed as a product demo. It is a **research dashboard** that supports evidence, explanation, and intervention prioritization.
 
@@ -33,6 +33,12 @@ Import these tables into Power BI:
 - `subgroup_model_performance.csv`
 - `risk_signal_trajectory.csv`
 - `threshold_cost_benefit.csv`
+- `ab_test_experiment_design.csv`
+- `ab_test_assignment.csv`
+- `ab_test_srm_check.csv`
+- `ab_test_balance.csv`
+- `ab_test_power_analysis.csv`
+- `ab_test_simulated_results.csv`
 
 ## 2. Relationship Logic
 
@@ -68,6 +74,12 @@ Profile / summary tables:
 - `subgroup_model_performance`
 - `risk_signal_trajectory`
 - `threshold_cost_benefit`
+- `ab_test_experiment_design`
+- `ab_test_assignment`
+- `ab_test_srm_check`
+- `ab_test_balance`
+- `ab_test_power_analysis`
+- `ab_test_simulated_results`
 
 ## 3. Core Measures
 
@@ -90,6 +102,10 @@ Avg Risk Probability = AVERAGE(champion_test_predictions[risk_probability])
 Critical Risk Learners = CALCULATE(COUNTROWS(risk_band_test_predictions), risk_band_test_predictions[risk_band] = "Critical")
 Earliest Useful Horizon = MINX(FILTER(selected_operating_points, selected_operating_points[is_earliest_useful_horizon] = TRUE()), selected_operating_points[horizon_day])
 Selected Review Load per 1000 = CALCULATE(MAX(threshold_cost_benefit[expected_review_load_per_1000]), threshold_cost_benefit[selected_operating_point] = TRUE())
+A/B Eligible Learners = COUNTROWS(ab_test_assignment)
+A/B Treatment Learners = CALCULATE(COUNTROWS(ab_test_assignment), ab_test_assignment[variant] = "treatment")
+A/B SRM P-value = MAX(ab_test_srm_check[p_value])
+A/B Minimum Detectable Effect = MAX(ab_test_power_analysis[minimum_detectable_effect])
 ```
 
 ## 4. Page 1 - Executive Overview
@@ -354,7 +370,61 @@ Show that the early-warning output is stable, subgroup-aware, and usable for adv
 
 > The model is evaluated as a deployable retention-targeting system, not only as an offline classifier. Threshold choice controls campaign size, while subgroup diagnostics identify where monitoring should focus.
 
-## 11. Recommended Slicers
+## 11. Page 8 - A/B Experiment Readiness
+
+### Business purpose
+
+Close the loop from offline prediction to causal validation by showing how the personalized intervention should be tested before rollout.
+
+### KPI cards
+
+- Eligible learners in the experiment
+- Control and treatment counts
+- SRM p-value
+- Minimum detectable effect
+- Smallest feasible lift scenario
+
+### Suggested visuals
+
+1. Experiment design checklist table:
+   - `design_component`
+   - `value`
+   - `lecture_alignment`
+2. Control/treatment assignment summary:
+   - `variant`
+   - count of enrollments
+   - average `risk_probability`
+   - average `recommendation_score`
+3. Balance check table:
+   - `feature`
+   - `level`
+   - `standardized_difference`
+   - `passed_balance_check`
+4. Power analysis bar chart:
+   - `absolute_lift`
+   - `required_n_per_group`
+   - `available_n_per_group`
+5. Simulated result chart:
+   - `scenario`
+   - `absolute_lift`
+   - `ci_95_lower`
+   - `ci_95_upper`
+   - `business_decision`
+
+### Source tables
+
+- `ab_test_experiment_design`
+- `ab_test_assignment`
+- `ab_test_srm_check`
+- `ab_test_balance`
+- `ab_test_power_analysis`
+- `ab_test_simulated_results`
+
+### Key message
+
+> The current project has not run a live causal experiment, but it now includes a ready-to-launch A/B test design: random control/treatment assignment, SRM check, balance diagnostics, power/MDE planning, confidence intervals, p-values, and a business decision rule.
+
+## 12. Recommended Slicers
 
 Use these slicers consistently:
 
@@ -368,7 +438,7 @@ Use these slicers consistently:
 - `metric`
 - `subgroup`
 
-## 12. Design Notes
+## 13. Design Notes
 
 Keep the dashboard analytical:
 
@@ -388,7 +458,7 @@ Suggested outcome colors:
 - `Fail`: orange
 - `Withdrawn`: red
 
-## 13. Presentation Flow
+## 14. Presentation Flow
 
 Use this order while presenting:
 
@@ -399,3 +469,4 @@ Use this order while presenting:
 5. Calibration and ablation
 6. Watchlist and intervention relevance
 7. Reliability, subgroup checks, and campaign-capacity trade-off
+8. A/B experiment readiness and causal validation plan

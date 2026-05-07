@@ -16,6 +16,7 @@ The repository now contains all source artifacts needed to assemble the research
 - page-level visual logic
 - wireframe screenshots
 - advanced reliability and campaign-capacity CSVs
+- A/B testing readiness CSVs
 
 ## What still requires Power BI Desktop
 
@@ -25,6 +26,7 @@ The repository now contains all source artifacts needed to assemble the research
 - slicer interactions
 - final theme and formatting
 - optional page 7 build for confidence intervals, subgroup diagnostics, risk trajectory, and threshold cost-benefit
+- optional page 8 build for A/B experiment readiness
 
 ## Recommended build order
 
@@ -33,7 +35,8 @@ The repository now contains all source artifacts needed to assemble the research
 3. Create KPI measures first
 4. Build page 4 and page 5 first because they hold the core research value
 5. Build page 7 next because it proves reliability, subgroup awareness, and campaign-capacity thinking
-6. Finish with page 6 watchlist and page 1 overview
+6. Build page 8 to show A/B experiment design, SRM, balance, power, and simulated decision logic
+7. Finish with page 6 watchlist and page 1 overview
 
 ## Advanced Table Refresh
 
@@ -51,6 +54,23 @@ This refreshes:
 - `threshold_cost_benefit.csv`
 
 Use `powerbi/dax_measure_catalog.md` for the recommended Power BI measures.
+
+## A/B Testing Table Refresh
+
+Run this after champion prediction outputs are regenerated:
+
+```bash
+make ab-testing
+```
+
+This refreshes:
+
+- `ab_test_experiment_design.csv`
+- `ab_test_assignment.csv`
+- `ab_test_srm_check.csv`
+- `ab_test_balance.csv`
+- `ab_test_power_analysis.csv`
+- `ab_test_simulated_results.csv`
 
 ## Naming
 

@@ -13,13 +13,20 @@ Use this before submitting or presenting the final project.
   - `subgroup_model_performance.csv`
   - `risk_signal_trajectory.csv`
   - `threshold_cost_benefit.csv`
+- [ ] Confirm `data/processed/` includes the A/B testing tables:
+  - `ab_test_experiment_design.csv`
+  - `ab_test_assignment.csv`
+  - `ab_test_srm_check.csv`
+  - `ab_test_balance.csv`
+  - `ab_test_power_analysis.csv`
+  - `ab_test_simulated_results.csv`
 
 ## Power BI Readiness
 
 - [ ] Import all CSV files listed in `powerbi/dashboard_storyboard.md`.
 - [ ] Build relationships using the enrollment key where applicable.
 - [ ] Create measures from `powerbi/dax_measure_catalog.md`.
-- [ ] Build the core six pages first, then add the optional reliability and campaign-capacity page.
+- [ ] Build the core six pages first, then add reliability/campaign-capacity and A/B experiment readiness pages.
 - [ ] Check slicers for module, presentation, segment, final result, risk band, and recommendation path.
 - [ ] Verify that risk-band charts show monotonic actual at-risk rate from Low to Critical.
 
@@ -32,6 +39,7 @@ Use this before submitting or presenting the final project.
 - [ ] Use ablation to defend why engagement and assessment behavior matter more than demographics alone.
 - [ ] Use calibration and risk bands to defend intervention prioritization.
 - [ ] Use confidence intervals and subgroup checks to show model reliability and responsible deployment thinking.
+- [ ] Use A/B testing outputs to explain control/treatment assignment, SRM, MDE, CI, p-value, and the business decision rule.
 
 ## Defense Answers to Prepare
 
@@ -41,5 +49,6 @@ Use this before submitting or presenting the final project.
 - Why choose XGBoost at day 30 as the final champion?
 - What does ablation prove?
 - How do calibration and risk bands help decision makers?
+- How does A/B testing move the project from prediction toward causal validation?
 - How does the dashboard support a Data-Driven Marketing workflow?
 - What would you test next before real deployment?

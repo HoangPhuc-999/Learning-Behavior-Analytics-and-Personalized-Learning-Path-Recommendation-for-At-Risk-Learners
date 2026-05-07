@@ -23,6 +23,7 @@
 - How early can at-risk learners be identified?
 - Which feature groups matter most?
 - Are the predicted probabilities useful for intervention prioritization?
+- How should the intervention be A/B tested before claiming causal impact?
 
 ## Slide 4. Pipeline Overview
 
@@ -33,6 +34,7 @@
 - Multi-horizon modeling
 - Ablation and calibration
 - Reliability, fairness, and threshold diagnostics
+- A/B testing readiness
 - Power BI research dashboard
 
 ## Slide 5. EDA Insights
@@ -161,41 +163,62 @@ Key sentence:
 
 > In a marketing or learner-retention setting, the threshold is a campaign capacity decision, not only a model metric.
 
-## Slide 17. Power BI Research Dashboard
+## Slide 17. A/B Testing Readiness
 
-- 7 pages:
+- Control group: `2,554` flagged learners with standard support
+- Treatment group: `2,553` flagged learners with risk-targeted personalized intervention
+- Primary metric: `retention_success`
+- SRM check p-value: `0.9888`, so the 50/50 split is valid
+- Minimum detectable effect: `3.82%`
+- Decision rule:
+  - deploy only if `p_value < 0.05`
+  - 95% CI excludes zero
+  - lift is practically meaningful
+
+Key sentence:
+
+> The project does not claim live causal proof; it adds the randomized experiment design needed to prove whether the intervention works after deployment.
+
+## Slide 18. Power BI Research Dashboard
+
+- 8 pages:
   - Executive Overview
   - Behavior & Outcome Analytics
   - Segmentation & Recommendation Context
   - Multi-Horizon Early Warning
   - Calibration & Model Diagnostics
   - At-Risk Learner Watchlist
+  - Reliability & Campaign Capacity
+  - A/B Experiment Readiness
 - Advanced page/table set:
   - confidence intervals
   - subgroup performance
   - risk trajectory
   - threshold cost-benefit
+  - A/B testing design
 
-## Slide 18. Managerial Implications
+## Slide 19. Managerial Implications
 
 - Day 7 can be used for early triage
 - Day 30 gives the strongest ranking
 - Critical risk band should be prioritized first
 - Segments help assign differentiated follow-up
 - Threshold choice should reflect advisor capacity
+- A/B testing should validate causal intervention lift before full rollout
 
-## Slide 19. Limitations and Future Work
+## Slide 20. Limitations and Future Work
 
 - Single dataset
 - At-risk target is broad
 - Recommendation is not causal
+- A/B testing is a design/simulation, not a completed live RCT
 - Subgroup checks are diagnostic, not causal fairness proof
 - Future work:
   - temporal sequence modeling
   - external validation
   - intervention impact evaluation
 
-## Slide 20. Conclusion
+## Slide 21. Conclusion
 
 - The project moved from a static classifier to a research-grade early-warning study
 - It links:
@@ -205,4 +228,5 @@ Key sentence:
   - multi-horizon prediction
   - calibration
   - intervention prioritization
+  - A/B testing readiness
   - capacity-aware targeting

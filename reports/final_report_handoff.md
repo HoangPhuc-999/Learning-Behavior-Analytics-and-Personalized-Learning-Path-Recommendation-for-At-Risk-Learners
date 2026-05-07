@@ -4,13 +4,13 @@ This file turns notebooks `01` to `06` into a report-ready narrative for the upg
 
 The new storyline is:
 
-`behavior analytics -> segmentation -> recommendation -> multi-horizon early warning -> ablation -> calibration -> reliability diagnostics -> intervention watchlist`
+`behavior analytics -> segmentation -> recommendation -> multi-horizon early warning -> ablation -> calibration -> reliability diagnostics -> intervention watchlist -> A/B testing readiness`
 
 ## 1. Executive Summary
 
 Use this as the opening paragraph:
 
-> This project analyzes learner behavior in the OULAD dataset and develops a research-focused framework for segmentation, personalized recommendation, and early identification of at-risk learners. The final pipeline uses 32,593 enrollment records and compares early-warning models at day 7, 14, 21, and 30. Results show that useful recall is already achievable at day 7, but predictive ranking quality improves materially as more course history becomes available. The final champion pair is an XGBoost model at day 30 with a recall-oriented threshold of 0.25, while calibration, confidence intervals, subgroup diagnostics, and threshold cost-benefit analysis show how the output can support a capacity-aware learner retention campaign.
+> This project analyzes learner behavior in the OULAD dataset and develops a research-focused framework for segmentation, personalized recommendation, and early identification of at-risk learners. The final pipeline uses 32,593 enrollment records and compares early-warning models at day 7, 14, 21, and 30. Results show that useful recall is already achievable at day 7, but predictive ranking quality improves materially as more course history becomes available. The final champion pair is an XGBoost model at day 30 with a recall-oriented threshold of 0.25, while calibration, confidence intervals, subgroup diagnostics, threshold cost-benefit analysis, and A/B testing readiness show how the output can support a capacity-aware learner retention campaign and a future causal intervention test.
 
 ## 2. Project Scope
 
@@ -344,40 +344,83 @@ Notebook `06` retrains the champion XGBoost model and produces SHAP outputs when
 
 > SHAP supports individual-level explanations for advisor dashboards, while the fallback native importance keeps the notebook reproducible even without optional dependencies.
 
-## 13. Managerial Implications
+## 13. A/B Testing and Experiment Readiness
 
-### 13.1 For instructors
+This section was added to close the methodological gap between offline prediction and causal validation.
+
+Use this sentence:
+
+> The model and recommendation layer identify who should be prioritized, but A/B testing is required to prove whether the intervention itself causes better learner outcomes.
+
+### 13.1 Experiment design
+
+- Experiment ID: `risk_targeted_personalized_intervention_ab_test`
+- Randomization unit: student-course enrollment
+- Control: standard learner support
+- Treatment: risk-targeted personalized intervention
+- Primary metric: `retention_success`
+- Secondary metrics: recommendation score, risk probability, risk-band mix, intervention path uptake
+- Guardrail metrics: advisor review load, false-alert ratio, subgroup recall monitoring
+
+### 13.2 Readiness checks
+
+- Eligible learners: `5,107`
+- Control group: `2,554`
+- Treatment group: `2,553`
+- SRM p-value: `0.9888`, so the planned 50/50 split passes the sample-ratio mismatch check
+- Historical baseline retention success among flagged learners: `0.3687`
+- Minimum detectable effect with current sample: `0.0382`
+
+### 13.3 Power and decision rule
+
+The current offline sample is not large enough to reliably detect a `+3%` absolute lift at 80% power, but it is large enough for `+5%`, `+8%`, and `+10%` scenarios.
+
+Use this sentence:
+
+> The recommended decision rule follows the lecture logic: deploy only if `p_value < 0.05`, the 95% confidence interval excludes zero, and the lift is large enough to matter operationally.
+
+The simulated `+5%` lift scenario has p-value `0.00026`, 95% CI `[+2.32%, +7.66%]`, and passes the business decision rule.
+
+Important limitation:
+
+> This is an A/B test design and offline simulation, not a completed live experiment. A real rollout would still need live randomized traffic and post-intervention outcome tracking.
+
+## 14. Managerial Implications
+
+### 14.1 For instructors
 
 - Treat `day 7` as the earliest viable warning checkpoint
 - Treat `day 30` as the strongest ranking checkpoint
 - Prioritize `Inactive Drop-offs` and `Sporadic Explorers` for intervention
 - Use recommendation paths to assign differentiated next actions
 
-### 13.2 For program managers
+### 14.2 For program managers
 
 - Compare module-level risk burden before assigning support resources
 - Use the risk bands instead of a single yes/no flag when triaging learners
 - Monitor the `Critical` risk band first because its realized at-risk rate is already above `92%`
 - Tune the operating threshold based on available advisor capacity
+- Use the A/B testing table to decide whether intervention lift is statistically and practically meaningful before full rollout
 
-### 13.3 For platform design
+### 14.3 For platform design
 
 - Push engagement prompts very early
 - Surface assessment actions more visibly
 - Reduce delays between weak early behavior and instructor outreach
 - Track subgroup performance after deployment to avoid hidden targeting gaps
 
-## 14. Limitations
+## 15. Limitations
 
 Use these points:
 
 - The target combines `Fail` and `Withdrawn`, which is useful operationally but broad
 - Recommendations are prototype-based rather than causal
+- A/B testing is currently a ready-to-launch design and simulation, not a completed live RCT
 - Calibration is evaluated on one dataset only
 - Subgroup diagnostics are observational fairness checks, not proof of causal fairness
 - External validation would still be needed before production deployment
 
-## 15. Suggested Report Structure
+## 16. Suggested Report Structure
 
 1. Introduction
 2. Research objectives and questions
@@ -390,11 +433,12 @@ Use these points:
 9. Ablation and calibration analysis
 10. Reliability, subgroup, and explainability diagnostics
 11. Power BI dashboard and intervention design
-12. Managerial implications
-13. Limitations and future work
-14. Conclusion
+12. A/B testing and experiment readiness
+13. Managerial implications
+14. Limitations and future work
+15. Conclusion
 
-## 16. Defense Q&A
+## 17. Defense Q&A
 
 ### Why not use threshold `0.50`?
 
@@ -419,6 +463,10 @@ It proves that demographics alone are weak, while the combination of engagement 
 ### Why add calibration and risk bands?
 
 Because interventions are prioritized by risk level, not only by hard class labels. Calibration shows whether the probabilities are trustworthy enough to support that prioritization.
+
+### Why add A/B testing if the dataset is historical?
+
+Because the offline model only proves prediction quality, not causal intervention impact. The project therefore adds a ready-to-launch randomized experiment design with control/treatment assignment, SRM check, power/MDE planning, p-values, confidence intervals, and a business decision rule.
 
 ### Why add confidence intervals?
 

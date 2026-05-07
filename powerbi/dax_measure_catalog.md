@@ -166,8 +166,43 @@ CALCULATE(
 )
 ```
 
+## A/B Testing
+
+```DAX
+A/B Eligible Learners =
+COUNTROWS(ab_test_assignment)
+
+A/B Control Learners =
+CALCULATE(
+    COUNTROWS(ab_test_assignment),
+    ab_test_assignment[variant] = "control"
+)
+
+A/B Treatment Learners =
+CALCULATE(
+    COUNTROWS(ab_test_assignment),
+    ab_test_assignment[variant] = "treatment"
+)
+
+A/B SRM P-value =
+MAX(ab_test_srm_check[p_value])
+
+A/B Minimum Detectable Effect =
+MAX(ab_test_power_analysis[minimum_detectable_effect])
+
+A/B Best Simulated Lift =
+MAXX(
+    FILTER(
+        ab_test_simulated_results,
+        ab_test_simulated_results[business_decision] = "Deploy"
+    ),
+    ab_test_simulated_results[absolute_lift]
+)
+```
+
 ## Formatting Notes
 
 - Format rates, precision, recall, AUC, and confidence interval measures as percentages or 3-decimal decimals consistently.
 - Use `risk_band_summary[band_edges]` only as tooltip text.
 - Keep `threshold_cost_benefit[threshold]` numeric so line charts sort correctly.
+- Format A/B lift, MDE, SRM p-value, and confidence interval fields as percentages or 3-decimal decimals consistently.

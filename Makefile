@@ -1,4 +1,4 @@
-.PHONY: feature-store modeling advanced-dashboard research validate test test-notebooks
+.PHONY: feature-store modeling advanced-dashboard ab-testing research validate test test-notebooks
 
 feature-store:
 	python scripts/run_feature_store.py
@@ -8,6 +8,9 @@ modeling:
 
 advanced-dashboard:
 	python scripts/export_advanced_dashboard_tables.py
+
+ab-testing:
+	python scripts/export_ab_testing_tables.py
 
 research:
 	python scripts/run_research_pipeline.py

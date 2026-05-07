@@ -42,6 +42,10 @@ This is a short speaking script for demoing the upgraded project in 5 to 7 minut
 
 > The final notebook also checks whether the model is stable and usable for a real retention workflow. Bootstrap confidence intervals show that recall and PR-AUC are stable on the test set, subgroup analysis checks whether recall drops for observable groups, and threshold cost-benefit analysis shows how many learners would need advisor review at each threshold.
 
-## 11. Close
+## 11. A/B Testing Readiness
 
-> So the final contribution is not just a classifier. It is a full early-warning research pipeline that explains learner behavior, segments learner types, recommends next actions, compares early-warning horizons, and translates model output into practical risk bands and capacity-aware targeting decisions.
+> Because prediction is not the same as causation, I added an A/B testing layer following the lecture checklist. Flagged learners are split into control and treatment groups, the split passes the SRM check, and the tables include balance diagnostics, sample-size and MDE planning, confidence intervals, p-values, and a deploy/do-not-deploy decision rule. This is not a completed live RCT, but it is the design needed to test the intervention after deployment.
+
+## 12. Close
+
+> So the final contribution is not just a classifier. It is a full early-warning research pipeline that explains learner behavior, segments learner types, recommends next actions, compares early-warning horizons, translates model output into practical risk bands, and prepares a causal A/B test for the intervention.

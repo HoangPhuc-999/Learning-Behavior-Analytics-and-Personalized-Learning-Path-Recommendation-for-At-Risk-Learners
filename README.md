@@ -1,16 +1,17 @@
 # Learning Behavior Analytics and Multi-Horizon Early Warning for At-Risk Learners
 
-This project uses the OULAD dataset to build an end-to-end learning analytics pipeline at the `learner + module + presentation` grain. The final deliverable is no longer just a day-30 classifier. It is a **data-driven marketing decision system** for learner retention, combining behavior analytics, segmentation, recommendation, multi-horizon early warning, calibration, fairness diagnostics, threshold cost-benefit analysis, and Power BI handoff artifacts.
+This project uses the OULAD dataset to build an end-to-end learning analytics pipeline at the `learner + module + presentation` grain. The final deliverable is no longer just a day-30 classifier. It is a **data-driven marketing decision system** for learner retention, combining behavior analytics, segmentation, recommendation, multi-horizon early warning, calibration, fairness diagnostics, threshold cost-benefit analysis, A/B testing readiness, and Power BI handoff artifacts.
 
 ## What Makes This Version Different
 
-The project now answers five stronger questions:
+The project now answers six stronger questions:
 
 1. How early can at-risk learners be identified at `day 7`, `14`, `21`, and `30`?
 2. Which horizon-model pair is strongest once recall-oriented thresholding is enforced?
 3. Which feature groups actually create the predictive lift?
 4. Are the predicted probabilities reliable enough to support risk-banded intervention?
 5. Which learner groups and intervention thresholds deserve extra review before a real retention campaign?
+6. How should the intervention be A/B tested before claiming causal impact?
 
 ## Key Results
 
@@ -41,6 +42,11 @@ The project now answers five stronger questions:
   - flags about `77.8%` of the validation cohort
   - catches about `488.6` at-risk learners per `1,000` enrollments
   - false-alert ratio: about `0.59` false positives per true positive
+- A/B testing readiness:
+  - eligible flagged learners: `5,107`
+  - control/treatment split: `2,554` / `2,553`
+  - SRM p-value: `0.9888`
+  - minimum detectable effect: `3.82%`
 
 ## Segmentation and Recommendation Highlights
 
@@ -137,7 +143,20 @@ The repo also exports these Power BI-ready advanced tables:
 - `risk_signal_trajectory.csv`
 - `threshold_cost_benefit.csv`
 
-### 6. Marketing decision framing
+### 6. A/B testing readiness
+
+The project now exports A/B testing tables aligned with the course lecture checklist:
+
+- `ab_test_experiment_design.csv`
+- `ab_test_assignment.csv`
+- `ab_test_srm_check.csv`
+- `ab_test_balance.csv`
+- `ab_test_power_analysis.csv`
+- `ab_test_simulated_results.csv`
+
+These tables document the control/treatment split, primary/secondary/guardrail metrics, sample-ratio mismatch check, balance diagnostics, MDE/power planning, confidence intervals, p-values, and the business decision rule. This is a ready-to-launch experiment design and offline simulation, not a completed live RCT.
+
+### 7. Marketing decision framing
 
 The analytical output maps directly to a retention and engagement campaign workflow:
 
@@ -145,13 +164,15 @@ The analytical output maps directly to a retention and engagement campaign workf
 2. prioritize outreach using calibrated risk bands,
 3. personalize intervention by segment and recommended path,
 4. tune thresholds based on advisor capacity,
-5. monitor subgroup performance before operational rollout.
+5. validate intervention lift through A/B testing,
+6. monitor subgroup performance before operational rollout.
 
 ## Repository Map
 
 - `notebooks/01_*.ipynb` to `06_*.ipynb`: full analysis pipeline
 - `src/features/multi_horizon_feature_store.py`: reusable horizon feature engineering logic
 - `src/features/advanced_dashboard_tables.py`: dashboard-ready reliability, subgroup, trajectory, and threshold tables
+- `src/experiments/ab_testing.py`: A/B testing design, SRM, balance, power, and simulated result logic
 - `src/models/multi_horizon_early_warning.py`: reusable multi-horizon modeling logic
 - `data/processed/`: all exported modeling, recommendation, and dashboard tables
 - `reports/final_report_handoff.md`: report-ready storyline and defense notes
@@ -208,6 +229,15 @@ The analytical output maps directly to a retention and engagement campaign workf
 - `risk_signal_trajectory.csv`
 - `threshold_cost_benefit.csv`
 
+### A/B testing
+
+- `ab_test_experiment_design.csv`
+- `ab_test_assignment.csv`
+- `ab_test_srm_check.csv`
+- `ab_test_balance.csv`
+- `ab_test_power_analysis.csv`
+- `ab_test_simulated_results.csv`
+
 ## How to Reproduce
 
 ### 1. Install dependencies
@@ -248,6 +278,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/06_at_risk_modelin
 make feature-store
 make modeling
 make advanced-dashboard
+make ab-testing
 make research
 make validate
 make test
@@ -256,6 +287,7 @@ make test-notebooks
 
 - `make validate` checks the exported research artifacts against the acceptance criteria
 - `make advanced-dashboard` refreshes the advanced Power BI-ready tables
+- `make ab-testing` refreshes the A/B testing readiness tables
 - `make test` runs the unit and acceptance tests
 - `make test-notebooks` runs notebook smoke tests for notebooks `04` and `06`
 
@@ -268,6 +300,7 @@ The repository includes the full research dashboard handoff:
 - page-level wireframes in `powerbi/dashboard_screenshot_pack/`,
 - reporting-ready CSV outputs,
 - advanced dashboard CSVs for reliability, subgroup fairness, trajectory, and threshold cost-benefit pages.
+- A/B testing CSVs for experiment readiness, SRM, balance, power, and simulated decision logic.
 
 The `.pbix` file itself must be assembled in Power BI Desktop from these exported tables.
 
@@ -275,7 +308,7 @@ The `.pbix` file itself must be assembled in Power BI Desktop from these exporte
 
 Most student projects stop at a single static classifier. This one now gives a full decision-relevant chain:
 
-`behavior -> segmentation -> recommendation -> multi-horizon early warning -> calibration -> risk bands -> capacity-aware intervention`
+`behavior -> segmentation -> recommendation -> multi-horizon early warning -> calibration -> risk bands -> capacity-aware intervention -> A/B testing readiness`
 
 That makes it defensible as both:
 

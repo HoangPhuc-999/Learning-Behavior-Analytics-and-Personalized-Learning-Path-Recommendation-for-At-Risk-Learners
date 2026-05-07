@@ -185,6 +185,88 @@ Use this composite key across the dashboard:
   - `delta_test_roc_auc_vs_full`
   - `delta_test_pr_auc_vs_full`
 
+### `ab_test_experiment_design.csv`
+
+- Grain: experiment-design component
+- Purpose: document the A/B testing setup in the lecture checklist format
+- Key fields:
+  - `experiment_id`
+  - `design_component`
+  - `value`
+  - `lecture_alignment`
+
+### `ab_test_assignment.csv`
+
+- Grain: eligible enrollment assigned to an experiment variant
+- Purpose: control/treatment assignment for flagged learners
+- Key fields:
+  - `experiment_id`
+  - `variant`
+  - `variant_label`
+  - `primary_metric`
+  - `primary_metric_observed`
+  - `stratification_key`
+  - `risk_probability`
+  - `risk_band`
+  - `recommended_path`
+
+### `ab_test_srm_check.csv`
+
+- Grain: experiment
+- Purpose: sample-ratio mismatch check for the planned traffic split
+- Key fields:
+  - `expected_control_share`
+  - `expected_treatment_share`
+  - `observed_control_n`
+  - `observed_treatment_n`
+  - `statistical_test`
+  - `chi_square_statistic`
+  - `p_value`
+  - `passed_srm_check`
+
+### `ab_test_balance.csv`
+
+- Grain: feature-level balance check
+- Purpose: verify that randomization produced similar control/treatment groups
+- Key fields:
+  - `feature_type`
+  - `feature`
+  - `level`
+  - `control_rate_or_mean`
+  - `treatment_rate_or_mean`
+  - `standardized_difference`
+  - `passed_balance_check`
+
+### `ab_test_power_analysis.csv`
+
+- Grain: effect-size scenario
+- Purpose: sample size, power, and MDE planning for a binary primary metric
+- Key fields:
+  - `baseline_success_rate`
+  - `absolute_lift`
+  - `relative_mde`
+  - `required_n_per_group`
+  - `available_n_per_group`
+  - `available_power`
+  - `minimum_detectable_effect`
+  - `feasible_with_current_sample`
+
+### `ab_test_simulated_results.csv`
+
+- Grain: historical or simulated experiment scenario
+- Purpose: show p-value, confidence interval, uplift, and business decision rule
+- Key fields:
+  - `scenario`
+  - `scenario_type`
+  - `statistical_test`
+  - `control_success_rate`
+  - `treatment_success_rate`
+  - `absolute_lift`
+  - `ci_95_lower`
+  - `ci_95_upper`
+  - `p_value`
+  - `business_decision`
+
 ### `model_feature_importance.csv`
 
 - Grain: feature

@@ -75,6 +75,104 @@ ADVANCED_TABLE_SCHEMAS = {
         "target_recall_met",
     },
 }
+AB_TEST_TABLE_SCHEMAS = {
+    "ab_test_experiment_design.csv": {
+        "experiment_id",
+        "design_component",
+        "value",
+        "lecture_alignment",
+    },
+    "ab_test_assignment.csv": {
+        "experiment_id",
+        "assignment_unit",
+        "eligibility_rule",
+        "variant",
+        "variant_label",
+        "primary_metric",
+        "primary_metric_observed",
+        "stratification_key",
+        "random_state",
+        "id_student",
+        "code_module",
+        "code_presentation",
+        "y_true",
+        "risk_probability",
+        "y_pred",
+        "risk_band",
+        "recommended_path",
+        "recommendation_score",
+    },
+    "ab_test_srm_check.csv": {
+        "experiment_id",
+        "check_name",
+        "statistical_test",
+        "expected_control_share",
+        "expected_treatment_share",
+        "observed_control_n",
+        "observed_treatment_n",
+        "observed_control_share",
+        "observed_treatment_share",
+        "chi_square_statistic",
+        "p_value",
+        "alpha",
+        "passed_srm_check",
+        "interpretation",
+    },
+    "ab_test_balance.csv": {
+        "feature_type",
+        "feature",
+        "level",
+        "control_n",
+        "treatment_n",
+        "control_rate_or_mean",
+        "treatment_rate_or_mean",
+        "absolute_difference",
+        "standardized_difference",
+        "passed_balance_check",
+    },
+    "ab_test_power_analysis.csv": {
+        "experiment_id",
+        "primary_metric",
+        "baseline_success_rate",
+        "baseline_source",
+        "absolute_lift",
+        "relative_mde",
+        "treatment_success_rate",
+        "alpha",
+        "target_power",
+        "required_n_per_group",
+        "required_total_n",
+        "available_n_per_group",
+        "available_total_n",
+        "available_power",
+        "minimum_detectable_effect",
+        "feasible_with_current_sample",
+    },
+    "ab_test_simulated_results.csv": {
+        "experiment_id",
+        "scenario",
+        "scenario_type",
+        "n_control",
+        "n_treatment",
+        "statistical_test",
+        "control_successes",
+        "treatment_successes",
+        "expected_additional_successes",
+        "minimum_practical_lift",
+        "decision_rule",
+        "business_decision",
+        "control_success_rate",
+        "treatment_success_rate",
+        "absolute_lift",
+        "relative_lift",
+        "ci_95_lower",
+        "ci_95_upper",
+        "z_score",
+        "p_value",
+        "significant_at_05",
+        "random_state",
+    },
+}
 
 
 @dataclass
@@ -82,6 +180,7 @@ class ResearchValidationSummary:
     processed_dir: Path
     horizon_shapes: pd.DataFrame
     advanced_table_shapes: pd.DataFrame
+    ab_test_table_shapes: pd.DataFrame
     model_pair_count: int
     ablation_row_count: int
     champion_metrics: pd.DataFrame
@@ -114,6 +213,12 @@ def validate_research_outputs(processed_dir: Path) -> ResearchValidationSummary:
         "subgroup_model_performance.csv",
         "risk_signal_trajectory.csv",
         "threshold_cost_benefit.csv",
+        "ab_test_experiment_design.csv",
+        "ab_test_assignment.csv",
+        "ab_test_srm_check.csv",
+        "ab_test_balance.csv",
+        "ab_test_power_analysis.csv",
+        "ab_test_simulated_results.csv",
     ] + [f"features_prediction_day{h:02d}.csv" for h in EXPECTED_HORIZONS]
 
     missing_files = [name for name in required_files if not (processed_dir / name).exists()]
@@ -245,10 +350,70 @@ def validate_research_outputs(processed_dir: Path) -> ResearchValidationSummary:
     _expect((threshold_rates.ge(0) & threshold_rates.le(1)).all().all(), "Threshold rate and classification metrics must stay within [0, 1]")
     _expect(cost_benefit.loc[cost_benefit["selected_operating_point"], "target_recall_met"].all(), "Selected operating point must meet target recall")
 
+    # A/B testing design and simulation tables
+    ab_test_table_rows: list[dict[str, int]] = []
+    for table_name, required_columns in AB_TEST_TABLE_SCHEMAS.items():
+        ab_test_df = pd.read_csv(processed_dir / table_name, low_memory=False)
+        ab_test_table_rows.append({"table": table_name, "rows": len(ab_test_df), "columns": ab_test_df.shape[1]})
+        _expect(not ab_test_df.empty, f"{table_name} must not be empty")
+        missing_columns = required_columns.difference(ab_test_df.columns)
+        _expect(not missing_columns, f"{table_name} is missing required columns: {sorted(missing_columns)}")
+
+    assignment = pd.read_csv(processed_dir / "ab_test_assignment.csv", low_memory=False)
+    _expect(set(assignment["variant"]) == {"control", "treatment"}, "ab_test_assignment.csv must contain control and treatment variants")
+    _expect(assignment["y_pred"].astype(int).eq(1).all(), "A/B assignment should only include champion-model flagged learners")
+    _expect(assignment["primary_metric"].eq("retention_success").all(), "A/B primary metric must be retention_success")
+    _expect(assignment["primary_metric_observed"].isin({0, 1}).all(), "A/B observed primary metric must be binary")
+    variant_counts = assignment["variant"].value_counts()
+    _expect(variant_counts.min() > 0, "A/B variants must both have positive sample counts")
+    _expect(abs(int(variant_counts["control"]) - int(variant_counts["treatment"])) <= 5, "A/B assignment should be close to a 50/50 split")
+
+    design = pd.read_csv(processed_dir / "ab_test_experiment_design.csv", low_memory=False)
+    expected_design_components = {
+        "business_question",
+        "randomization_unit",
+        "control_group",
+        "treatment_group",
+        "primary_metric",
+        "secondary_metrics",
+        "guardrail_metrics",
+        "sample_size_base",
+        "baseline_rate",
+        "minimum_duration_rule",
+        "decision_rule",
+        "pitfall_checks",
+    }
+    _expect(expected_design_components.issubset(set(design["design_component"])), "A/B experiment design is missing lecture-aligned components")
+
+    srm = pd.read_csv(processed_dir / "ab_test_srm_check.csv", low_memory=False)
+    _expect(srm["check_name"].eq("sample_ratio_mismatch").all(), "A/B SRM table must check sample_ratio_mismatch")
+    _expect(srm["p_value"].between(0, 1).all(), "A/B SRM p-values must stay within [0, 1]")
+    _expect(srm["passed_srm_check"].isin({True, False}).all(), "A/B SRM pass flags must be boolean")
+
+    balance = pd.read_csv(processed_dir / "ab_test_balance.csv", low_memory=False)
+    _expect(balance["feature_type"].isin({"numeric", "categorical"}).all(), "A/B balance table contains unexpected feature_type values")
+    _expect(balance["control_rate_or_mean"].notna().all(), "A/B balance table contains null control values")
+    _expect(balance["treatment_rate_or_mean"].notna().all(), "A/B balance table contains null treatment values")
+    _expect(balance["passed_balance_check"].isin({True, False}).all(), "A/B balance checks must be boolean")
+
+    power = pd.read_csv(processed_dir / "ab_test_power_analysis.csv", low_memory=False)
+    _expect(power["baseline_success_rate"].between(0, 1).all(), "A/B baseline rates must stay within [0, 1]")
+    _expect(power["relative_mde"].gt(0).all(), "A/B relative MDE values must be positive")
+    _expect(power["treatment_success_rate"].between(0, 1).all(), "A/B treatment rates must stay within [0, 1]")
+    _expect(power["required_n_per_group"].gt(0).all(), "A/B power table requires positive sample sizes")
+    _expect(power["minimum_detectable_effect"].between(0, 1).all(), "A/B MDE values must stay within [0, 1]")
+
+    simulated = pd.read_csv(processed_dir / "ab_test_simulated_results.csv", low_memory=False)
+    _expect({"historical_check", "simulated_lift"}.issubset(set(simulated["scenario_type"])), "A/B simulated results must contain a historical check and lift scenarios")
+    _expect(simulated["p_value"].between(0, 1).all(), "A/B p-values must stay within [0, 1]")
+    _expect(simulated["significant_at_05"].isin({True, False}).all(), "A/B significance flags must be boolean")
+    _expect(simulated["business_decision"].isin({"Deploy", "Do not deploy", "Hold: historical A/A check is for randomization quality, not treatment launch."}).all(), "A/B business decisions contain unexpected labels")
+
     return ResearchValidationSummary(
         processed_dir=processed_dir,
         horizon_shapes=horizon_shapes,
         advanced_table_shapes=pd.DataFrame(advanced_table_rows),
+        ab_test_table_shapes=pd.DataFrame(ab_test_table_rows),
         model_pair_count=len(comparison_pairs),
         ablation_row_count=len(ablation),
         champion_metrics=champion_metrics,
