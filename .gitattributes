@@ -1,2 +1,5 @@
 # Keep raw and processed CSV artifacts in Git LFS.
 *.csv filter=lfs diff=lfs merge=lfs -text
+
+# Keep Power BI Desktop binaries in Git LFS.
+*.pbix filter=lfs diff=lfs merge=lfs -text

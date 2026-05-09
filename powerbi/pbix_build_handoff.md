@@ -2,6 +2,7 @@
 
 The repository now contains all source artifacts needed to assemble the research dashboard in Power BI Desktop:
 
+- `final_decision_dashboard.pbix`
 - `dashboard_storyboard.md`
 - `dashboard_data_dictionary.md`
 - `dashboard_screenshot_pack/`
@@ -17,16 +18,18 @@ The repository now contains all source artifacts needed to assemble the research
 - wireframe screenshots
 - advanced reliability and campaign-capacity CSVs
 - A/B testing readiness CSVs
+- validated PBIX dashboard file
 
 ## What still requires Power BI Desktop
 
-- importing the CSVs into a `.pbix`
-- building measures and visuals
-- page layout polish
-- slicer interactions
-- final theme and formatting
+- optional data source repointing before refresh on another machine
+- optional page layout polish
+- optional slicer interaction review
+- optional final theme and formatting
 - optional page 7 build for confidence intervals, subgroup diagnostics, risk trajectory, and threshold cost-benefit
 - optional page 8 build for A/B experiment readiness
+
+See `pbix_validation_report.md` for the latest PBIX data checks and non-blocking notes.
 
 ## Recommended build order
 
@@ -74,6 +77,6 @@ This refreshes:
 
 ## Naming
 
-When the Power BI Desktop build is created, save it as:
+The submitted Power BI Desktop build is saved as:
 
 `powerbi/final_decision_dashboard.pbix`

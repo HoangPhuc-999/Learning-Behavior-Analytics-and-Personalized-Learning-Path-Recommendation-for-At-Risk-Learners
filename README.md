@@ -12,7 +12,8 @@ For grading, start with these files:
 - `data/processed/`: exported research, recommendation, dashboard, and A/B testing tables
 - `reports/final_report_handoff.md`: report-ready storyline and defense notes
 - `reports/final_submission_checklist.md`: final verification checklist
-- `powerbi/`: Power BI storyboard, data dictionary, DAX catalog, and build handoff
+- `powerbi/final_decision_dashboard.pbix`: final Power BI dashboard
+- `powerbi/`: Power BI storyboard, data dictionary, DAX catalog, PBIX validation report, and build handoff
 
 Final verification snapshot on `2026-05-09`:
 
@@ -314,14 +315,16 @@ make test-notebooks
 
 The repository includes the full research dashboard handoff:
 
+- final Power BI Desktop file: `powerbi/final_decision_dashboard.pbix`,
 - updated storyboard,
 - data dictionary,
+- PBIX validation report,
 - page-level wireframes in `powerbi/dashboard_screenshot_pack/`,
 - reporting-ready CSV outputs,
 - advanced dashboard CSVs for reliability, subgroup fairness, trajectory, and threshold cost-benefit pages.
 - A/B testing CSVs for experiment readiness, SRM, balance, power, and simulated decision logic.
 
-The `.pbix` file itself must be assembled in Power BI Desktop from these exported tables.
+The embedded PBIX model has been checked against the repository outputs. Refreshing on another machine may require repointing the Power Query source folder to this repository's `data/processed/` directory.
 
 ## Why This Project Is Special
 
