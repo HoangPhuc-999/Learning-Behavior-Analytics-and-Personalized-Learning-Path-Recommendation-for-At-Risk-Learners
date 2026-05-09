@@ -2,6 +2,25 @@
 
 This project uses the OULAD dataset to build an end-to-end learning analytics pipeline at the `learner + module + presentation` grain. The final deliverable is no longer just a day-30 classifier. It is a **data-driven marketing decision system** for learner retention, combining behavior analytics, segmentation, recommendation, multi-horizon early warning, calibration, fairness diagnostics, threshold cost-benefit analysis, A/B testing readiness, and Power BI handoff artifacts.
 
+## Final Submission Package
+
+For grading, start with these files:
+
+- `[GROUP 7] Final_Project_Report.pdf`: final written report
+- `README.md`: project overview, key results, reproduction guide, and artifact map
+- `notebooks/01_*.ipynb` to `notebooks/06_*.ipynb`: full analysis workflow
+- `data/processed/`: exported research, recommendation, dashboard, and A/B testing tables
+- `reports/final_report_handoff.md`: report-ready storyline and defense notes
+- `reports/final_submission_checklist.md`: final verification checklist
+- `powerbi/`: Power BI storyboard, data dictionary, DAX catalog, and build handoff
+
+Final verification snapshot on `2026-05-09`:
+
+- `make validate`: passed
+- `make test`: passed, `23` tests run with `2` notebook integration tests skipped by default
+- `make test-notebooks`: passed, `2` notebook smoke tests executed
+- `git lfs status`: clean
+
 ## What Makes This Version Different
 
 The project now answers six stronger questions:

@@ -2,18 +2,27 @@
 
 Use this before submitting or presenting the final project.
 
+## Final Verification Snapshot
+
+Verified on `2026-05-09`:
+
+- `make validate`: passed
+- `make test`: passed, `23` tests run with `2` notebook integration tests skipped by default
+- `make test-notebooks`: passed, `2` notebook smoke tests executed
+- `git lfs status`: clean
+
 ## Repository Readiness
 
-- [ ] Pull latest branch and confirm `git status` is clean.
-- [ ] Run `make validate` and confirm `Research output validation passed`.
-- [ ] Run `make test` and confirm all non-integration tests pass.
-- [ ] If time allows, run `make test-notebooks` for full notebook execution.
-- [ ] Confirm `data/processed/` includes the four advanced dashboard tables:
+- [x] Pull latest branch and confirm `git status` is clean.
+- [x] Run `make validate` and confirm `Research output validation passed`.
+- [x] Run `make test` and confirm all non-integration tests pass.
+- [x] Run `make test-notebooks` for notebook smoke execution.
+- [x] Confirm `data/processed/` includes the four advanced dashboard tables:
   - `champion_metric_bootstrap_ci.csv`
   - `subgroup_model_performance.csv`
   - `risk_signal_trajectory.csv`
   - `threshold_cost_benefit.csv`
-- [ ] Confirm `data/processed/` includes the A/B testing tables:
+- [x] Confirm `data/processed/` includes the A/B testing tables:
   - `ab_test_experiment_design.csv`
   - `ab_test_assignment.csv`
   - `ab_test_srm_check.csv`
