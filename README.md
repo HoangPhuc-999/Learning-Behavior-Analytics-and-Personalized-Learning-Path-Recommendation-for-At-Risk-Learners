@@ -7,6 +7,7 @@ This project uses the OULAD dataset to build an end-to-end learning analytics pi
 For grading, start with these files:
 
 - `[GROUP 7] Final_Project_Report.pdf`: final written report
+- `[GROUP 7] Final Project Report.tex`: editable LaTeX source for the final report
 - `README.md`: project overview, key results, reproduction guide, and artifact map
 - `notebooks/01_*.ipynb` to `notebooks/06_*.ipynb`: full analysis workflow
 - `data/processed/`: exported research, recommendation, dashboard, and A/B testing tables
@@ -303,6 +304,7 @@ make research
 make validate
 make test
 make test-notebooks
+make report
 ```
 
 - `make validate` checks the exported research artifacts against the acceptance criteria
@@ -310,6 +312,7 @@ make test-notebooks
 - `make ab-testing` refreshes the A/B testing readiness tables
 - `make test` runs the unit and acceptance tests
 - `make test-notebooks` runs notebook smoke tests for notebooks `04` and `06`
+- `make report` rebuilds the final PDF from the LaTeX source and requires `tectonic`
 
 ## Power BI Status
 

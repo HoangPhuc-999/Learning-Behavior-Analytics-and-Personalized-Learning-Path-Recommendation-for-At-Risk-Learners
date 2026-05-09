@@ -1,4 +1,8 @@
-.PHONY: feature-store modeling advanced-dashboard ab-testing research validate test test-notebooks
+.PHONY: feature-store modeling advanced-dashboard ab-testing research validate test test-notebooks report
+
+REPORT_TEX := [GROUP 7] Final Project Report.tex
+REPORT_PDF := [GROUP 7] Final_Project_Report.pdf
+REPORT_BUILD_DIR := build/report
 
 feature-store:
 	python scripts/run_feature_store.py
@@ -23,3 +27,8 @@ test:
 
 test-notebooks:
 	RUN_NOTEBOOK_INTEGRATION=1 python -m unittest tests.test_notebook_execution -v
+
+report:
+	mkdir -p "$(REPORT_BUILD_DIR)"
+	tectonic --outdir "$(REPORT_BUILD_DIR)" "$(REPORT_TEX)"
+	cp "$(REPORT_BUILD_DIR)/[GROUP 7] Final Project Report.pdf" "$(REPORT_PDF)"
