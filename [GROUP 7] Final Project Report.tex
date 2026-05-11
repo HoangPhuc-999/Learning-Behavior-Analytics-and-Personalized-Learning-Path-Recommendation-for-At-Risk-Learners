@@ -112,9 +112,18 @@ The unit of analysis throughout the pipeline is an enrollment of a learner in a 
 
 \subsection{Data Tables Used}
 
-The project uses seven core tables: \texttt{courses}, \texttt{studentInfo}, \texttt{studentRegistration}, \texttt{assessments}, \texttt{studentAssessment}, \texttt{vle}, and \texttt{studentVle}. The \texttt{studentInfo} table anchors final outcomes and learner profiles; \texttt{studentRegistration} records registration and withdrawal; \texttt{studentVle} provides daily clickstream data; \texttt{vle} describes learning-resource types; and \texttt{assessments} together with \texttt{studentAssessment} provides deadlines, weights, submission dates, and scores.
+{\raggedright
+The project uses seven core OULAD tables, grouped by analytical role:
+\begin{itemize}
+\item Learner profile and final outcome: \texttt{studentInfo}.
+\item Registration and withdrawal timing: \texttt{studentRegistration}.
+\item Assessment design and scores: \texttt{assessments} and \texttt{studentAssessment}.
+\item Learning-resource metadata: \texttt{courses} and \texttt{vle}.
+\item Daily clickstream behavior: \texttt{studentVle}.
+\end{itemize}
+\par}
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Final outcome distribution in the analytical sample}
@@ -242,7 +251,7 @@ Equation~\eqref{eq:lri} deliberately gives higher weight to score and engagement
 
 The four prediction tables at days 7, 14, 21, and 30 each contain 32,593 rows and 40 columns, with no missing cells after imputation and no duplicate enrollment keys. Table~\ref{tab:horizon-coverage} shows the central trade-off of the project: earlier horizons leave more time for intervention but observe less assessment evidence.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Feature-store coverage by horizon}
@@ -274,7 +283,7 @@ The main clustering features include total clicks, active days, early engagement
 
 The segmentation results produce four interpretable learning groups. Table~\ref{tab:segments} reports the size and \risk{} rate of each group.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Summary of learner segments}
@@ -301,9 +310,15 @@ The recommendation layer is designed to be explainable rather than algorithmical
 RecScore_{i,p} = w_1 A_{p} + w_2 S_{i,p} + w_3 E_{i,p} + w_4 C_{i,p},
 \end{equation}
 
-where \(A_p\) is path accessibility, \(S_{i,p}\) is fit with similar profiles, \(E_{i,p}\) is fit with the learner's current engagement intensity, and \(C_{i,p}\) is the expected completion probability or completion-support component. This formula is used as an interpretive framework for the dashboard; the actual output is summarized into four main recommendation paths in Table~\ref{tab:paths}.
+where \(A_p\) is path accessibility, \(S_{i,p}\) is fit with similar profiles, \(E_{i,p}\) is fit with the learner's current engagement intensity, and \(C_{i,p}\) is the expected completion probability or completion-support component. In the implemented dashboard, the weights are fixed as \(w_1=0.20\), \(w_2=0.30\), \(w_3=0.25\), and \(w_4=0.25\), so the operational score is:
 
-\begin{table}[t]
+\begin{equation}
+RecScore_i = 100 \times (0.20A_i + 0.30S_i + 0.25E_i + 0.25C_i).
+\end{equation}
+
+The highest weight is given to similar-profile fit because recommendations should be anchored in successful-peer behavior from the same segment. Engagement fit and completion support receive equal weight because the system should consider both current learning behavior and likely ability to complete. Accessibility receives a smaller but still meaningful weight, ensuring that recommended actions are practical and connected to available learning resources. This formula is used as an interpretive framework for the dashboard; the actual output is summarized into four main recommendation paths in Table~\ref{tab:paths}.
+
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Most common recommendation paths}
@@ -382,7 +397,7 @@ The key interpretation is that ranking quality improves over time, while recall 
 
 The final champion is XGBoost at day 30 with threshold 0.25. The model is selected based on validation performance after applying recall-oriented thresholding, then evaluated on the independent test set. Table~\ref{tab:champion} reports test performance.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Champion model performance on the held-out test set}
@@ -412,7 +427,7 @@ Recall 0.9367 means the model captures more than 93\% of at-risk enrollments in 
 
 Ablation is added to answer the question: does model performance come mainly from demographics, engagement, assessment, or a combination of signals? Table~\ref{tab:ablation} shows that the full feature set is strongest at both day 14 and day 30. In particular, demographics only reaches PR-AUC 0.6666, substantially below engagement + assessment and the full feature set.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Ablation results by test PR-AUC}
@@ -436,7 +451,7 @@ This result has two implications. Methodologically, the model is not driven only
 
 Predicted probabilities are useful only if they are ordered and calibrated well enough to support intervention prioritization. Therefore, the project converts champion-model probabilities into four risk bands: Low, Medium, High, and Critical. Table~\ref{tab:risk-bands} shows that realized at-risk rates increase monotonically by risk band, from 15.4\% in Low to 92.5\% in Critical.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Risk bands on the held-out test set}
@@ -463,7 +478,7 @@ The variables with the highest global importance in the champion model include \
 
 To avoid relying on a single point estimate, the project bootstraps test-set metrics. Table~\ref{tab:bootstrap} shows that the 95\% confidence intervals are fairly narrow, especially for recall and PR-AUC.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{Bootstrap 95\% confidence intervals for the champion model}
@@ -545,7 +560,7 @@ The prediction model answers the question of who is at risk, but it does not pro
 
 The experiment ID is summarized as \textit{Risk Targeted Intervention A/B Test}. The randomization unit is student-course enrollment. The control group receives standard support, while the treatment group receives personalized intervention based on risk band, segment, and recommended path. The primary metric is \texttt{retention\_success}, meaning that the final outcome after intervention does not belong to the \risk{} group. Secondary metrics include recommendation score, risk probability, risk-band mix, and path uptake. Guardrails include advisor review load, false-alert ratio, and subgroup recall monitoring.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \footnotesize
 \caption{A/B testing readiness}
