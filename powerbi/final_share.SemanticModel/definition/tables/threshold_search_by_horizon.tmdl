@@ -1,0 +1,150 @@
+table threshold_search_by_horizon
+	lineageTag: 52ec370a-26f3-440b-8397-365858bd4812
+
+	column accuracy
+		dataType: double
+		lineageTag: 1206c918-a33b-4b15-aa33-68168c3fccdd
+		summarizeBy: sum
+		sourceColumn: accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column f1
+		dataType: double
+		lineageTag: f8156463-cdbf-4311-83cb-db6877cd3ea8
+		summarizeBy: sum
+		sourceColumn: f1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column roc_auc
+		dataType: double
+		lineageTag: 4ef953c3-c301-4997-853f-142f9598983a
+		summarizeBy: sum
+		sourceColumn: roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pr_auc
+		dataType: double
+		lineageTag: 78874813-27ee-4a8f-85eb-3a14f82d4b47
+		summarizeBy: sum
+		sourceColumn: pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brier_score
+		dataType: double
+		lineageTag: 3c699a52-bb24-40e0-93c0-a0b0b4029efd
+		summarizeBy: sum
+		sourceColumn: brier_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tn
+		dataType: int64
+		formatString: 0
+		lineageTag: 8598e8d0-094d-4246-afc9-158eba7a77fd
+		summarizeBy: sum
+		sourceColumn: tn
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp
+		dataType: int64
+		formatString: 0
+		lineageTag: db186aa5-c09e-454c-a6a8-376875a6bbef
+		summarizeBy: sum
+		sourceColumn: fp
+
+		annotation SummarizationSetBy = Automatic
+
+	column fn
+		dataType: int64
+		formatString: 0
+		lineageTag: cfe9e533-6b6e-4feb-bd90-2e4f3b918f59
+		summarizeBy: sum
+		sourceColumn: fn
+
+		annotation SummarizationSetBy = Automatic
+
+	column tp
+		dataType: int64
+		formatString: 0
+		lineageTag: 89232323-d046-4e75-8709-9eedc9662a60
+		summarizeBy: sum
+		sourceColumn: tp
+
+		annotation SummarizationSetBy = Automatic
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 6517cba4-18b8-4e9e-9b51-4d07d2c0a0c7
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: 699234ea-cb50-4310-824a-f0d2dcd7061f
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: 0465a740-6ed3-45f6-ac6d-840e18867c80
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: c0231de6-d0be-43eb-945b-72b9afe41e68
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column threshold
+		dataType: double
+		lineageTag: a4818039-c382-4b61-a362-aeaf785ae74f
+		summarizeBy: sum
+		sourceColumn: threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition threshold_search_by_horizon = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\threshold_search_by_horizon.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"threshold", type number}, {"accuracy", type number}, {"precision", type number}, {"recall", type number}, {"f1", type number}, {"f2", type number}, {"roc_auc", type number}, {"pr_auc", type number}, {"brier_score", type number}, {"tn", Int64.Type}, {"fp", Int64.Type}, {"fn", Int64.Type}, {"tp", Int64.Type}, {"horizon_day", Int64.Type}, {"model", type text}}),
+				    #"Unpivoted Only Selected Columns" = Table.Unpivot(#"Changed Type", {"precision", "recall", "f2"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Only Selected Columns",{{"Attribute", "metric"}, {"Value", "value"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

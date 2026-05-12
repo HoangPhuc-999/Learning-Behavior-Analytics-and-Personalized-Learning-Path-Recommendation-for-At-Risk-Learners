@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "13d7241dd452150ece07",
+  "position": {
+    "x": 775.9036144578314,
+    "y": 667.46987951807228,
+    "z": 7000,
+    "height": 179.51807228915663,
+    "width": 767.46987951807228,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "personalized_learning_paths"
+                    }
+                  },
+                  "Property": "recommended_path"
+                }
+              },
+              "queryRef": "personalized_learning_paths.recommended_path",
+              "nativeQueryRef": "recommended_path"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "personalized_learning_paths"
+                    }
+                  },
+                  "Property": "action_1"
+                }
+              },
+              "queryRef": "personalized_learning_paths.action_1",
+              "nativeQueryRef": "action_1"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "personalized_learning_paths"
+                    }
+                  },
+                  "Property": "action_2"
+                }
+              },
+              "queryRef": "personalized_learning_paths.action_2",
+              "nativeQueryRef": "action_2"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "personalized_learning_paths"
+                    }
+                  },
+                  "Property": "action_3"
+                }
+              },
+              "queryRef": "personalized_learning_paths.action_3",
+              "nativeQueryRef": "action_3"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "personalized_learning_paths"
+                    }
+                  },
+                  "Property": "recommendation_score"
+                }
+              },
+              "queryRef": "Sum(personalized_learning_paths.recommendation_score)",
+              "nativeQueryRef": "recommendation_score"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

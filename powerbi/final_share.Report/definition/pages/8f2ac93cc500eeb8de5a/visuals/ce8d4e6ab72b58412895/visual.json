@@ -1,0 +1,156 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ce8d4e6ab72b58412895",
+  "position": {
+    "x": 78.3132530120482,
+    "y": 236.14457831325302,
+    "z": 12000,
+    "height": 595.18072289156635,
+    "width": 721.68674698795189,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimHorizon"
+                    }
+                  },
+                  "Property": "HorizonLabel"
+                }
+              },
+              "queryRef": "DimHorizon.HorizonLabel",
+              "nativeQueryRef": "HorizonLabel",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "features_horizon_metadata"
+                        }
+                      },
+                      "Property": "observed_activity_rate"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(features_horizon_metadata.observed_activity_rate)",
+              "nativeQueryRef": "Activity Rate",
+              "displayName": "Activity Rate"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "features_horizon_metadata"
+                        }
+                      },
+                      "Property": "submission_coverage"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(features_horizon_metadata.submission_coverage)",
+              "nativeQueryRef": "Submission coverage",
+              "displayName": "Submission coverage"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "features_horizon_metadata"
+                        }
+                      },
+                      "Property": "score_coverage"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(features_horizon_metadata.score_coverage)",
+              "nativeQueryRef": "Score coverage",
+              "displayName": "Score coverage"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Feature Evidence Coverage by Horizon'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

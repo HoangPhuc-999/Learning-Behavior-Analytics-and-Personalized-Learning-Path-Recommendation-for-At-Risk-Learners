@@ -1,0 +1,60 @@
+table cluster_success_activity_profile
+	lineageTag: 347dfc0c-c6c5-4c2e-941d-8abd1300819a
+
+	column cluster_label
+		dataType: string
+		lineageTag: afafbfee-c3e8-4fc7-8d22-13d4c95566ea
+		summarizeBy: none
+		sourceColumn: cluster_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_type
+		dataType: string
+		lineageTag: e80e3362-ee8c-4639-8a51-9972a9af909d
+		summarizeBy: none
+		sourceColumn: activity_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_label
+		dataType: string
+		lineageTag: 816e6e54-b864-4ded-ac33-ad7283035c45
+		summarizeBy: none
+		sourceColumn: activity_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column sum_click
+		dataType: int64
+		formatString: 0
+		lineageTag: 46ee86b5-1fe6-42c1-b84a-654a8ed03d62
+		summarizeBy: sum
+		sourceColumn: sum_click
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_activity_share
+		dataType: double
+		lineageTag: 8f247384-6401-4b46-ab16-d5f0d3f9807d
+		summarizeBy: sum
+		sourceColumn: cluster_activity_share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition cluster_success_activity_profile = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\cluster_success_activity_profile.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"cluster_label", type text}, {"activity_type", type text}, {"activity_label", type text}, {"sum_click", Int64.Type}, {"cluster_activity_share", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

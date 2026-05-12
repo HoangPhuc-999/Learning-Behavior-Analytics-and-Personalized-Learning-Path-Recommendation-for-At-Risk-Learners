@@ -1,0 +1,164 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "fa0db918f69c6d6a0420",
+  "position": {
+    "x": 466.05672461116194,
+    "y": 643.092406221409,
+    "z": 35000,
+    "height": 229.73467520585544,
+    "width": 370.53979871912168,
+    "tabOrder": 30000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "features_final"
+                    }
+                  },
+                  "Property": "code_module"
+                }
+              },
+              "queryRef": "features_final.code_module",
+              "nativeQueryRef": "Module",
+              "active": true,
+              "displayName": "Module"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__Measure"
+                    }
+                  },
+                  "Property": "At-Risk Rate"
+                }
+              },
+              "queryRef": "__Measure.At-Risk Rate",
+              "nativeQueryRef": "At-Risk Rate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "__Measure"
+                  }
+                },
+                "Property": "At-Risk Rate"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Risk Burden by Module'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "129a9b1f33f2dbea7de9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "features_final"
+              }
+            },
+            "Property": "code_module"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c4230e591815cb923205",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__Measure"
+              }
+            },
+            "Property": "At-Risk Rate"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

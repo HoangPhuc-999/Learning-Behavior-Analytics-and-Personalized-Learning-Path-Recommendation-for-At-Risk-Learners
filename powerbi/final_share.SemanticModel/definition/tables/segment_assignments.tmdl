@@ -1,0 +1,114 @@
+table segment_assignments
+	lineageTag: ee04ab36-4861-4f60-a594-30e98240ea0d
+
+	column id_student
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ea93444-72c9-4a54-878e-a8e1b6d4988c
+		summarizeBy: sum
+		sourceColumn: id_student
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_module
+		dataType: string
+		lineageTag: 726486e7-4555-4426-8e7d-2643a63ea987
+		summarizeBy: none
+		sourceColumn: code_module
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_presentation
+		dataType: string
+		lineageTag: 39772088-8e4f-4415-8398-e94be3f57f82
+		summarizeBy: none
+		sourceColumn: code_presentation
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_result
+		dataType: string
+		lineageTag: b5fa46d9-37d9-49fe-8289-96a5befeced1
+		summarizeBy: none
+		sourceColumn: final_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column at_risk
+		dataType: int64
+		formatString: 0
+		lineageTag: 832df6b1-818e-41e7-9eb3-8275a7b02f00
+		summarizeBy: sum
+		sourceColumn: at_risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column rule_segment
+		dataType: string
+		lineageTag: a54d541d-1150-49ae-8e8e-d7646eebe424
+		summarizeBy: none
+		sourceColumn: rule_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d2868f6d-a61b-4181-bb36-b71e4d17d986
+		summarizeBy: sum
+		sourceColumn: cluster_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_label
+		dataType: string
+		lineageTag: 1aab98d0-635c-4bfb-9b73-01ed995c20cf
+		summarizeBy: none
+		sourceColumn: cluster_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column pca_1
+		dataType: double
+		lineageTag: 98867c84-f578-4282-8190-8ffd6b4ddc42
+		summarizeBy: sum
+		sourceColumn: pca_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pca_2
+		dataType: double
+		lineageTag: 29b8262e-416a-40c0-a4b2-47bc1a006b1b
+		summarizeBy: sum
+		sourceColumn: pca_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EnrollmentKey
+		dataType: string
+		lineageTag: dc46b110-fdce-4a9a-92df-c1a1ab1c8810
+		summarizeBy: none
+		sourceColumn: EnrollmentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition segment_assignments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\segment_assignments.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id_student", Int64.Type}, {"code_module", type text}, {"code_presentation", type text}, {"final_result", type text}, {"at_risk", Int64.Type}, {"rule_segment", type text}, {"cluster_id", Int64.Type}, {"cluster_label", type text}, {"pca_1", type number}, {"pca_2", type number}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "EnrollmentKey", each Text.From([id_student]) & "|" & [code_module] & "|" & [code_presentation]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"EnrollmentKey", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

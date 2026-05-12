@@ -1,0 +1,151 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "0c3e60fda55be476da91",
+  "position": {
+    "x": 990.12345679012344,
+    "y": 635.80246913580243,
+    "z": 34000,
+    "height": 227.16049382716048,
+    "width": 571.60493827160485,
+    "tabOrder": 30000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ab_test_power_analysis"
+                    }
+                  },
+                  "Property": "absolute_lift"
+                }
+              },
+              "queryRef": "ab_test_power_analysis.absolute_lift",
+              "nativeQueryRef": "absolute_lift",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ab_test_power_analysis"
+                        }
+                      },
+                      "Property": "required_n_per_group"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(ab_test_power_analysis.required_n_per_group)",
+              "nativeQueryRef": "Required n per group",
+              "displayName": "Required n per group"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ab_test_power_analysis"
+                        }
+                      },
+                      "Property": "available_n_per_group"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(ab_test_power_analysis.available_n_per_group)",
+              "nativeQueryRef": "Available n per group",
+              "displayName": "Available n per group"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "ab_test_power_analysis"
+                      }
+                    },
+                    "Property": "required_n_per_group"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Power Analysis and Minimum Detectable Effect'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

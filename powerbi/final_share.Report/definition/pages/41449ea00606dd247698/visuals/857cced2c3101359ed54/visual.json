@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "857cced2c3101359ed54",
+  "position": {
+    "x": 956.79012345679007,
+    "y": 561.72839506172841,
+    "z": 16000,
+    "height": 300,
+    "width": 591.358024691358,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Playbook Table"
+                    }
+                  },
+                  "Property": "TableName"
+                }
+              },
+              "queryRef": "Playbook Table.TableName",
+              "nativeQueryRef": "TableName"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Playbook Table"
+                    }
+                  },
+                  "Property": "Role"
+                }
+              },
+              "queryRef": "Playbook Table.Role",
+              "nativeQueryRef": "Role"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Playbook Table"
+                    }
+                  },
+                  "Property": "Grain"
+                }
+              },
+              "queryRef": "Playbook Table.Grain",
+              "nativeQueryRef": "Grain"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Playbook Table"
+                    }
+                  },
+                  "Property": "UsedInPage"
+                }
+              },
+              "queryRef": "Playbook Table.UsedInPage",
+              "nativeQueryRef": "UsedInPage"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Playbook Table"
+                  }
+                },
+                "Property": "Role"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

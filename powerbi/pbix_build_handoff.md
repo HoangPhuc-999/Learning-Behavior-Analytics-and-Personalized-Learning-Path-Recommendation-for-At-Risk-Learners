@@ -2,7 +2,8 @@
 
 The repository now contains all source artifacts needed to assemble the research dashboard in Power BI Desktop:
 
-- `final_decision_dashboard.pbix`
+- `final_share.pbix`
+- `final_share.pbip`
 - `dashboard_storyboard.md`
 - `dashboard_data_dictionary.md`
 - `dashboard_screenshot_pack/`
@@ -79,4 +80,8 @@ This refreshes:
 
 The submitted Power BI Desktop build is saved as:
 
-`powerbi/final_decision_dashboard.pbix`
+`powerbi/final_share.pbix`
+
+The editable Power BI project source is saved as:
+
+`powerbi/final_share.pbip`

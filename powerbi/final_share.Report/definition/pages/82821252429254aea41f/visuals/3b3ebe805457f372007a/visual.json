@@ -1,0 +1,150 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "3b3ebe805457f372007a",
+  "position": {
+    "x": 56.25,
+    "y": 743.75,
+    "z": 18000,
+    "height": 112.5,
+    "width": 736.25,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "threshold_cost_benefit"
+                        }
+                      },
+                      "Property": "threshold"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.threshold)",
+              "nativeQueryRef": "Sum of threshold"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "threshold_cost_benefit"
+                        }
+                      },
+                      "Property": "flagged_pct"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.flagged_pct)",
+              "nativeQueryRef": "Sum of flagged_pct"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "threshold_cost_benefit"
+                        }
+                      },
+                      "Property": "expected_review_load_per_1000"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.expected_review_load_per_1000)",
+              "nativeQueryRef": "Sum of expected_review_load_per_1000"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "threshold_cost_benefit"
+                        }
+                      },
+                      "Property": "caught_at_risk_per_1000"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.caught_at_risk_per_1000)",
+              "nativeQueryRef": "Sum of caught_at_risk_per_1000"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "threshold_cost_benefit"
+                        }
+                      },
+                      "Property": "false_alert_ratio"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.false_alert_ratio)",
+              "nativeQueryRef": "Sum of false_alert_ratio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "selected_operating_point"
+                }
+              },
+              "queryRef": "threshold_cost_benefit.selected_operating_point",
+              "nativeQueryRef": "selected_operating_point"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "threshold_cost_benefit"
+                  }
+                },
+                "Property": "selected_operating_point"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

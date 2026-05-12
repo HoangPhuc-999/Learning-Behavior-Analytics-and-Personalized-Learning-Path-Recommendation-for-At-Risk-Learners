@@ -1,0 +1,212 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "9271697794d177adf7b8",
+  "position": {
+    "x": 33.75,
+    "y": 685,
+    "z": 20000,
+    "height": 186.25,
+    "width": 1517.5,
+    "tabOrder": 19000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "EnrollmentKey"
+                }
+              },
+              "queryRef": "champion_test_predictions.EnrollmentKey",
+              "nativeQueryRef": "EnrollmentKey"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "champion_test_predictions"
+                        }
+                      },
+                      "Property": "id_student"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.id_student)",
+              "nativeQueryRef": "Sum of id_student"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "code_module"
+                }
+              },
+              "queryRef": "champion_test_predictions.code_module",
+              "nativeQueryRef": "code_module"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "code_presentation"
+                }
+              },
+              "queryRef": "champion_test_predictions.code_presentation",
+              "nativeQueryRef": "code_presentation"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "final_result"
+                }
+              },
+              "queryRef": "champion_test_predictions.final_result",
+              "nativeQueryRef": "final_result"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "champion_test_predictions"
+                        }
+                      },
+                      "Property": "y_true"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.y_true)",
+              "nativeQueryRef": "Sum of y_true"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "champion_test_predictions"
+                        }
+                      },
+                      "Property": "y_pred"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.y_pred)",
+              "nativeQueryRef": "Sum of y_pred"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "champion_test_predictions"
+                        }
+                      },
+                      "Property": "risk_probability"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.risk_probability)",
+              "nativeQueryRef": "Sum of risk_probability"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "risk_band"
+                }
+              },
+              "queryRef": "champion_test_predictions.risk_band",
+              "nativeQueryRef": "risk_band"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "cluster_label"
+                }
+              },
+              "queryRef": "champion_test_predictions.cluster_label",
+              "nativeQueryRef": "cluster_label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "recommended_path"
+                }
+              },
+              "queryRef": "champion_test_predictions.recommended_path",
+              "nativeQueryRef": "recommended_path"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "prediction_outcome"
+                }
+              },
+              "queryRef": "champion_test_predictions.prediction_outcome",
+              "nativeQueryRef": "prediction_outcome"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

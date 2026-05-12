@@ -1,0 +1,342 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "27515a3c9a1d2818daff",
+  "position": {
+    "x": 821.88449848024311,
+    "y": 543.46504559270511,
+    "z": 34000,
+    "height": 165.34954407294833,
+    "width": 729.483282674772,
+    "tabOrder": 34000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "horizon_day"
+                }
+              },
+              "queryRef": "selected_operating_points.horizon_day",
+              "nativeQueryRef": "Horizon Day",
+              "displayName": "Horizon Day"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "selected_operating_points.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "threshold"
+                }
+              },
+              "queryRef": "Sum(selected_operating_points.threshold)",
+              "nativeQueryRef": "threshold"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "precision"
+                }
+              },
+              "queryRef": "Sum(selected_operating_points.precision)",
+              "nativeQueryRef": "precision"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "recall"
+                }
+              },
+              "queryRef": "Sum(selected_operating_points.recall)",
+              "nativeQueryRef": "recall"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "f2"
+                }
+              },
+              "queryRef": "Sum(selected_operating_points.f2)",
+              "nativeQueryRef": "f2"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "selected_operating_points"
+                    }
+                  },
+                  "Property": "pr_auc"
+                }
+              },
+              "queryRef": "Sum(selected_operating_points.pr_auc)",
+              "nativeQueryRef": "pr_auc"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Best Model per Horizon'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8ac2e13349c532148558",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "is_best_for_horizon"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "s",
+              "Entity": "selected_operating_points",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "s"
+                          }
+                        },
+                        "Property": "is_best_for_horizon"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "3bd533133f74cbe74b6f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "horizon_day"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "18bfbd48711f728141b4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "344c9f98fd085e6378ad",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "threshold"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d0cd58463d9bfe7c0d28",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "precision"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2734ea269ee90e5f9d96",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "recall"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6d214c7a1d5f05315ed9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "f2"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4cc264eb8eff2bab9f56",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "selected_operating_points"
+              }
+            },
+            "Property": "pr_auc"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+table DimHorizon
+	lineageTag: ed54d458-be1d-4e72-ad92-cbd805bda175
+
+	column horizon_day
+		formatString: 0
+		lineageTag: d498c1ea-a1f4-4b56-bbae-7e771ce8ddfa
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [horizon_day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column HorizonLabel
+		lineageTag: cacd1717-5470-43d5-b2e4-400bf30a13a3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [HorizonLabel]
+		sortByColumn: HorizonSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column HorizonSort
+		formatString: 0
+		lineageTag: 59eb75d0-9801-49b9-9a64-920e999d3367
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [HorizonSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimHorizon = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "horizon_day", INTEGER,
+				    "HorizonLabel", STRING,
+				    "HorizonSort", INTEGER,
+				    {
+				        {7, "Day 7", 1},
+				        {14, "Day 14", 2},
+				        {21, "Day 21", 3},
+				        {30, "Day 30", 4}
+				    }
+				)
+
+	annotation PBI_Id = 7f980b63c4fc4e429da413e8ac96643b
+

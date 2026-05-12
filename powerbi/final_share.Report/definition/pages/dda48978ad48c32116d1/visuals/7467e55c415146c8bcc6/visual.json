@@ -1,0 +1,280 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "7467e55c415146c8bcc6",
+  "position": {
+    "x": 96,
+    "y": 229,
+    "z": 16000,
+    "height": 267,
+    "width": 734,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "threshold"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.threshold)",
+              "nativeQueryRef": "threshold"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "precision"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.precision)",
+              "nativeQueryRef": "precision"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "recall"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.recall)",
+              "nativeQueryRef": "recall"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "f2"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.f2)",
+              "nativeQueryRef": "f2"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "flagged_pct"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.flagged_pct)",
+              "nativeQueryRef": "flagged_pct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "expected_review_load_per_1000"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.expected_review_load_per_1000)",
+              "nativeQueryRef": "expected_review_load_per_1000"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "caught_at_risk_per_1000"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.caught_at_risk_per_1000)",
+              "nativeQueryRef": "caught_at_risk_per_1000"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "false_alert_ratio"
+                }
+              },
+              "queryRef": "Sum(threshold_cost_benefit.false_alert_ratio)",
+              "nativeQueryRef": "false_alert_ratio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_cost_benefit"
+                    }
+                  },
+                  "Property": "selected_operating_point"
+                }
+              },
+              "queryRef": "threshold_cost_benefit.selected_operating_point",
+              "nativeQueryRef": "selected_operating_point"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "aa84505995787a46a9ee",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "threshold"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5f1635e720fce5b14dec",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "precision"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8c71fd2f99e3bfdc1a20",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "recall"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f510c07651d52c6f9f71",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "f2"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "df0423891beece1a5de9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "flagged_pct"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8cc53669ee5d67afb6db",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "expected_review_load_per_1000"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8f227b725900d84ac7cf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "caught_at_risk_per_1000"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "de133d07f00f928bc1b1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "false_alert_ratio"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "49bec0961cd9e1a706a0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "threshold_cost_benefit"
+              }
+            },
+            "Property": "selected_operating_point"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

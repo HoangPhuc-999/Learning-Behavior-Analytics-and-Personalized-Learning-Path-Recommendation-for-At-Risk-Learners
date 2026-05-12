@@ -1,0 +1,197 @@
+table risk_band_test_predictions
+	lineageTag: 762f2444-ad3b-4dcb-9eab-98295882ff3e
+
+	column id_student
+		dataType: int64
+		formatString: 0
+		lineageTag: 6034b4e9-026b-48d6-aea5-f90dec357e68
+		summarizeBy: sum
+		sourceColumn: id_student
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_module
+		dataType: string
+		lineageTag: f209d599-6da5-4517-977c-4bc3e6033a26
+		summarizeBy: none
+		sourceColumn: code_module
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_presentation
+		dataType: string
+		lineageTag: 0387ce34-cdac-4394-858f-ae9e09e98088
+		summarizeBy: none
+		sourceColumn: code_presentation
+
+		annotation SummarizationSetBy = Automatic
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: a398d945-de6f-4898-b6c6-2eb01f8a279f
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: 2d596e0e-b4fd-4734-9aeb-5fce3d5b38d6
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column selected_threshold
+		dataType: double
+		lineageTag: 808b2886-cc9c-4deb-a0b2-9a0e028aa8fe
+		summarizeBy: sum
+		sourceColumn: selected_threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y_true
+		dataType: int64
+		formatString: 0
+		lineageTag: fe0cf011-b4b5-4813-8ae0-6962af23fe4b
+		summarizeBy: sum
+		sourceColumn: y_true
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_probability
+		dataType: double
+		lineageTag: f53f47e2-fe56-4d0b-a1d6-383c96d427a1
+		summarizeBy: sum
+		sourceColumn: risk_probability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y_pred
+		dataType: int64
+		formatString: 0
+		lineageTag: 89ea4b6c-aef1-48f7-8c3f-b26cf35fe7ae
+		summarizeBy: sum
+		sourceColumn: y_pred
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_band
+		dataType: string
+		lineageTag: 8fb10772-5eb4-4bf8-9492-26a63a2c32ee
+		summarizeBy: none
+		sourceColumn: risk_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_band_method
+		dataType: string
+		lineageTag: 917028ea-66f3-45ab-86a1-5a25ad874f70
+		summarizeBy: none
+		sourceColumn: risk_band_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_result
+		dataType: string
+		lineageTag: 0915a5ac-1c8f-4933-b99e-a86281d95a3d
+		summarizeBy: none
+		sourceColumn: final_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_label
+		dataType: string
+		lineageTag: 96b6f973-20e7-4a54-9217-3431369c0292
+		summarizeBy: none
+		sourceColumn: cluster_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column rule_segment
+		dataType: string
+		lineageTag: 6d33c135-20f8-4f5f-8e7d-72bfbf45c3e3
+		summarizeBy: none
+		sourceColumn: rule_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommended_path
+		dataType: string
+		lineageTag: 9434c4b1-b96b-46bc-b764-46d7659919b6
+		summarizeBy: none
+		sourceColumn: recommended_path
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_1
+		dataType: string
+		lineageTag: f50c2ac6-8c6b-4e7d-83b6-ef5aba036e5e
+		summarizeBy: none
+		sourceColumn: action_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_2
+		dataType: string
+		lineageTag: 979b7cca-c8f2-4d70-885c-93800a820750
+		summarizeBy: none
+		sourceColumn: action_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_3
+		dataType: string
+		lineageTag: 945f0f7c-19f5-4a7f-87ca-e12edc6cb123
+		summarizeBy: none
+		sourceColumn: action_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommendation_score
+		dataType: double
+		lineageTag: 71914fd3-4b7a-48dd-b082-9f3be60271ab
+		summarizeBy: sum
+		sourceColumn: recommendation_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column prediction_outcome
+		dataType: string
+		lineageTag: afd5d057-fb88-4a18-9844-9699cbcd9ba8
+		summarizeBy: none
+		sourceColumn: prediction_outcome
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnrollmentKey
+		dataType: string
+		lineageTag: ac149d5b-655d-4016-891f-4b65194b0b53
+		summarizeBy: none
+		sourceColumn: EnrollmentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition risk_band_test_predictions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\risk_band_test_predictions.csv"),[Delimiter=",", Columns=20, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id_student", Int64.Type}, {"code_module", type text}, {"code_presentation", type text}, {"horizon_day", Int64.Type}, {"model", type text}, {"selected_threshold", type number}, {"y_true", Int64.Type}, {"risk_probability", type number}, {"y_pred", Int64.Type}, {"risk_band", type text}, {"risk_band_method", type text}, {"final_result", type text}, {"cluster_label", type text}, {"rule_segment", type text}, {"recommended_path", type text}, {"action_1", type text}, {"action_2", type text}, {"action_3", type text}, {"recommendation_score", type number}, {"prediction_outcome", type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "EnrollmentKey", each Text.From([id_student]) & "|" & [code_module] & "|" & [code_presentation]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"EnrollmentKey", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

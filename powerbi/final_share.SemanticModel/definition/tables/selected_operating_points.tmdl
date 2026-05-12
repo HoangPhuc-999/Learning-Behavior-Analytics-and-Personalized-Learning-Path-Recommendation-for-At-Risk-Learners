@@ -1,0 +1,203 @@
+table selected_operating_points
+	lineageTag: 039448e5-e13b-4aa0-ac0b-1421afedeb66
+
+	measure 'Selected Threshold Dynamic' =
+			
+			MAX(selected_operating_points[threshold])
+		lineageTag: b591c7d9-3d72-4744-b859-ca7510fb8b72
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column threshold
+		dataType: double
+		lineageTag: af807e25-ae1c-45a2-927c-d46c3b428f70
+		summarizeBy: sum
+		sourceColumn: threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column accuracy
+		dataType: double
+		lineageTag: 788704cf-9567-415b-942f-649ddbf7add3
+		summarizeBy: sum
+		sourceColumn: accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column precision
+		dataType: double
+		lineageTag: 0ab3a0a7-138e-48e6-9dca-37a24a2db16f
+		summarizeBy: sum
+		sourceColumn: precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column recall
+		dataType: double
+		lineageTag: 9eed4b9f-0ce1-413b-95bf-a65ad432ec56
+		summarizeBy: sum
+		sourceColumn: recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column f1
+		dataType: double
+		lineageTag: f5658ab3-1d33-40ba-848e-f88a4c35f605
+		summarizeBy: sum
+		sourceColumn: f1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column f2
+		dataType: double
+		lineageTag: a8b0f18e-d44f-4cc2-8360-a0b334c77c8d
+		summarizeBy: sum
+		sourceColumn: f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column roc_auc
+		dataType: double
+		lineageTag: 896bf78e-5d94-4519-9ff2-5cd400843c0d
+		summarizeBy: sum
+		sourceColumn: roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pr_auc
+		dataType: double
+		lineageTag: 46fe4069-0444-408f-a9a1-4d05cda36255
+		summarizeBy: sum
+		sourceColumn: pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brier_score
+		dataType: double
+		lineageTag: edcfc6c8-422e-4e6f-9380-f17c9ea09966
+		summarizeBy: sum
+		sourceColumn: brier_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tn
+		dataType: int64
+		formatString: 0
+		lineageTag: d5abbeca-aa8c-489d-8597-4c3d3f0935b0
+		summarizeBy: sum
+		sourceColumn: tn
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp
+		dataType: int64
+		formatString: 0
+		lineageTag: b1cfb6c3-2f51-4af4-a18a-92933d3530da
+		summarizeBy: sum
+		sourceColumn: fp
+
+		annotation SummarizationSetBy = Automatic
+
+	column fn
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fbc2492-0a20-4918-aace-eb97e98af4ac
+		summarizeBy: sum
+		sourceColumn: fn
+
+		annotation SummarizationSetBy = Automatic
+
+	column tp
+		dataType: int64
+		formatString: 0
+		lineageTag: 63f232a5-b57c-4d81-aed6-b86ed8521173
+		summarizeBy: sum
+		sourceColumn: tp
+
+		annotation SummarizationSetBy = Automatic
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d8756ae-d3dd-4bd1-8b18-a345c75187fc
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: c76f9411-d84f-4ccc-b433-a8ef5b98a958
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column meets_target_recall
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5da981f4-bab1-42ba-b050-e96e25f8c1cd
+		summarizeBy: none
+		sourceColumn: meets_target_recall
+
+		annotation SummarizationSetBy = Automatic
+
+	column feature_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 8470b442-b9d7-47c1-b05b-af7e86378619
+		summarizeBy: sum
+		sourceColumn: feature_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_best_for_horizon
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c0722309-eab1-4f10-b27a-7a0907b33fb9
+		summarizeBy: none
+		sourceColumn: is_best_for_horizon
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_earliest_useful_horizon
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 034164bf-3817-436a-aced-80990e84767c
+		summarizeBy: none
+		sourceColumn: is_earliest_useful_horizon
+
+		annotation SummarizationSetBy = Automatic
+
+	partition selected_operating_points = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\selected_operating_points.csv"),[Delimiter=",", Columns=19, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"threshold", type number}, {"accuracy", type number}, {"precision", type number}, {"recall", type number}, {"f1", type number}, {"f2", type number}, {"roc_auc", type number}, {"pr_auc", type number}, {"brier_score", type number}, {"tn", Int64.Type}, {"fp", Int64.Type}, {"fn", Int64.Type}, {"tp", Int64.Type}, {"horizon_day", Int64.Type}, {"model", type text}, {"meets_target_recall", type logical}, {"feature_count", Int64.Type}, {"is_best_for_horizon", type logical}, {"is_earliest_useful_horizon", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

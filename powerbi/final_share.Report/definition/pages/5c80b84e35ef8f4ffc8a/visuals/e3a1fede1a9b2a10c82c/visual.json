@@ -1,0 +1,180 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "e3a1fede1a9b2a10c82c",
+  "position": {
+    "x": 828.23529411764707,
+    "y": 470.58823529411768,
+    "z": 6000,
+    "height": 392.94117647058823,
+    "width": 732.94117647058829,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ablation_results"
+                    }
+                  },
+                  "Property": "feature_group"
+                }
+              },
+              "queryRef": "ablation_results.feature_group",
+              "nativeQueryRef": "feature_group",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimHorizon"
+                    }
+                  },
+                  "Property": "HorizonLabel"
+                }
+              },
+              "queryRef": "DimHorizon.HorizonLabel",
+              "nativeQueryRef": "HorizonLabel"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ablation_results"
+                        }
+                      },
+                      "Property": "test_pr_auc"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(ablation_results.test_pr_auc)",
+              "nativeQueryRef": "Average of test_pr_auc"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ablation Study: Feature Group Contribution'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8145bcb9c10863081f55",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ablation_results"
+              }
+            },
+            "Property": "feature_group"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b3b0ba8325904db19ad9",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "ablation_results"
+                  }
+                },
+                "Property": "test_pr_auc"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f39991f9ddf0ff122fd5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimHorizon"
+              }
+            },
+            "Property": "HorizonLabel"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

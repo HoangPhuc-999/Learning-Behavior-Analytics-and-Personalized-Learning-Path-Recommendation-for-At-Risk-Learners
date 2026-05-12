@@ -1,0 +1,379 @@
+table features_final
+	lineageTag: 517a380e-c424-45db-bf45-6fe9e1e171a8
+
+	column id_student
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fe96de5-30c7-426b-bf24-59543ee04468
+		summarizeBy: sum
+		sourceColumn: id_student
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_module
+		dataType: string
+		lineageTag: a921aa5f-b33b-48c9-b6e2-82c268e61f7d
+		summarizeBy: none
+		sourceColumn: code_module
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_presentation
+		dataType: string
+		lineageTag: 5316ebd6-82f4-40bd-9159-3b3c90f821b5
+		summarizeBy: none
+		sourceColumn: code_presentation
+
+		annotation SummarizationSetBy = Automatic
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bd4c59b-709c-4f30-b49f-2b028e9a7fe5
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: b132106d-a006-4b06-a7dd-f820f814f193
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 6036b753-b19e-4bd5-89d7-41fda3edc80d
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column highest_education
+		dataType: string
+		lineageTag: 6e416335-9097-4a77-b66d-019133ca7e77
+		summarizeBy: none
+		sourceColumn: highest_education
+
+		annotation SummarizationSetBy = Automatic
+
+	column imd_band
+		dataType: string
+		lineageTag: c5aa2dfe-37a9-4221-9094-7f22dd534547
+		summarizeBy: none
+		sourceColumn: imd_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_band
+		dataType: string
+		lineageTag: 06e6afd8-32d8-4317-bb57-9d3c6e4bd669
+		summarizeBy: none
+		sourceColumn: age_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_of_prev_attempts
+		dataType: int64
+		formatString: 0
+		lineageTag: 73846fb3-3327-42b3-a836-0bb868e501e0
+		summarizeBy: sum
+		sourceColumn: num_of_prev_attempts
+
+		annotation SummarizationSetBy = Automatic
+
+	column studied_credits
+		dataType: int64
+		formatString: 0
+		lineageTag: 51e8ee8b-ccb3-43d2-bbc6-bbd4c3d3314f
+		summarizeBy: sum
+		sourceColumn: studied_credits
+
+		annotation SummarizationSetBy = Automatic
+
+	column disability
+		dataType: string
+		lineageTag: 2c943a2e-5813-402d-b08d-1bf29bd4275e
+		summarizeBy: none
+		sourceColumn: disability
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_result
+		dataType: string
+		lineageTag: f9e520ff-97c1-47d3-b18b-ffadc51f3b6c
+		summarizeBy: none
+		sourceColumn: final_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column at_risk
+		dataType: int64
+		formatString: 0
+		lineageTag: 51b025fd-b5be-406a-a2cb-f2e07b2d3f50
+		summarizeBy: sum
+		sourceColumn: at_risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_clicks
+		dataType: int64
+		formatString: 0
+		lineageTag: fb9b55de-32b2-4ed4-b943-a8e9f9f6b1a2
+		summarizeBy: sum
+		sourceColumn: total_clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 4532abed-1fab-4678-8fee-1e531c8cb461
+		summarizeBy: sum
+		sourceColumn: active_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_activity_date
+		dataType: int64
+		formatString: 0
+		lineageTag: bed348cb-e631-4194-9636-4e4a38925349
+		summarizeBy: sum
+		sourceColumn: last_activity_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last
+		dataType: int64
+		formatString: 0
+		lineageTag: c85c5164-98c8-479e-bb90-01f28c2ee9f4
+		summarizeBy: sum
+		sourceColumn: days_since_last
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_activity_date
+		dataType: int64
+		formatString: 0
+		lineageTag: 118ad9ea-f70f-4fd7-8a73-a58181ae14b0
+		summarizeBy: sum
+		sourceColumn: first_activity_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_span
+		dataType: int64
+		formatString: 0
+		lineageTag: f8086938-1182-4e5d-a925-86892f76bb97
+		summarizeBy: sum
+		sourceColumn: activity_span
+
+		annotation SummarizationSetBy = Automatic
+
+	column early_engagement
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ac61357-3957-4493-8088-bf635bbcff99
+		summarizeBy: sum
+		sourceColumn: early_engagement
+
+		annotation SummarizationSetBy = Automatic
+
+	column early_engagement_ratio
+		dataType: double
+		lineageTag: 2f9ca5ef-87fb-42b1-b2c0-cce465d0ef2e
+		summarizeBy: sum
+		sourceColumn: early_engagement_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column has_submission_by_day30
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c06c1a7-5e72-4b03-a1b4-be3006ea7229
+		summarizeBy: sum
+		sourceColumn: has_submission_by_day30
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_submission_delay
+		dataType: int64
+		formatString: 0
+		lineageTag: 52cb1c6e-bcc1-485d-b137-993642cf1d01
+		summarizeBy: sum
+		sourceColumn: avg_submission_delay
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_score
+		dataType: int64
+		formatString: 0.0
+		lineageTag: 0059a0d5-6823-49b8-beb9-8c5aecb7a210
+		summarizeBy: sum
+		sourceColumn: avg_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column score_std
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b0ee1a5-9c83-44fc-a57e-68c4c612ddad
+		summarizeBy: sum
+		sourceColumn: score_std
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_submitted
+		dataType: int64
+		formatString: 0
+		lineageTag: 6878877f-935e-4625-9d9a-e44178713c8e
+		summarizeBy: sum
+		sourceColumn: num_submitted
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_total_assessments
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ee1f2e5-7b16-4ee9-bdb8-0d1cd4b460b1
+		summarizeBy: sum
+		sourceColumn: num_total_assessments
+
+		annotation SummarizationSetBy = Automatic
+
+	column completion_ratio
+		dataType: double
+		lineageTag: 82380ee8-9705-48dc-a3bd-3556706098b9
+		summarizeBy: sum
+		sourceColumn: completion_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delay_norm
+		dataType: double
+		lineageTag: 914fa069-f682-4ee4-ba09-0de72d9e9da2
+		summarizeBy: sum
+		sourceColumn: delay_norm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_clicks_log
+		dataType: double
+		lineageTag: ce33cc5c-f445-4456-a5d8-851cf76ee92c
+		summarizeBy: sum
+		sourceColumn: total_clicks_log
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column active_days_log
+		dataType: double
+		lineageTag: 726871ee-a175-4d52-a5a4-1c40d01bee3a
+		summarizeBy: sum
+		sourceColumn: active_days_log
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column early_engagement_log
+		dataType: double
+		lineageTag: 94a5045e-c28e-4a57-9190-ae0235c88fbd
+		summarizeBy: sum
+		sourceColumn: early_engagement_log
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column engagement_intensity_log
+		dataType: double
+		lineageTag: 677d0c3b-defb-4ece-bf88-60c613f87eb0
+		summarizeBy: sum
+		sourceColumn: engagement_intensity_log
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column engagement_intensity
+		dataType: double
+		lineageTag: dddd4783-e6cd-4dad-a173-15c194965049
+		summarizeBy: sum
+		sourceColumn: engagement_intensity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column assessment_discipline
+		dataType: double
+		lineageTag: 8a70104e-e8df-49d4-98b5-190d2f4c34aa
+		summarizeBy: sum
+		sourceColumn: assessment_discipline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column persistence_score
+		dataType: double
+		lineageTag: 2485d21f-386c-46ab-babb-b8fa19498544
+		summarizeBy: sum
+		sourceColumn: persistence_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column learning_risk_index
+		dataType: double
+		lineageTag: 032e832d-19aa-444e-8379-bab24bf34853
+		summarizeBy: sum
+		sourceColumn: learning_risk_index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EnrollmentKey
+		dataType: string
+		lineageTag: 3ddd0243-dc85-482f-a72c-0c07786e3066
+		summarizeBy: none
+		sourceColumn: EnrollmentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Status' =
+			
+			IF(features_final[at_risk] = 1, "At-Risk", "Not At-Risk")
+		lineageTag: cd46a95a-e437-4489-8179-d8a6f077ecfb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition features_final = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\features_final.csv"),[Delimiter=",", Columns=38, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id_student", Int64.Type}, {"code_module", type text}, {"code_presentation", type text}, {"horizon_day", Int64.Type}, {"gender", type text}, {"region", type text}, {"highest_education", type text}, {"imd_band", type text}, {"age_band", type text}, {"num_of_prev_attempts", Int64.Type}, {"studied_credits", Int64.Type}, {"disability", type text}, {"final_result", type text}, {"at_risk", Int64.Type}, {"total_clicks", Int64.Type}, {"active_days", Int64.Type}, {"last_activity_date", Int64.Type}, {"days_since_last", Int64.Type}, {"first_activity_date", Int64.Type}, {"activity_span", Int64.Type}, {"early_engagement", Int64.Type}, {"early_engagement_ratio", type number}, {"has_submission_by_day30", Int64.Type}, {"avg_submission_delay", Int64.Type}, {"avg_score", Int64.Type}, {"score_std", Int64.Type}, {"num_submitted", Int64.Type}, {"num_total_assessments", Int64.Type}, {"completion_ratio", type number}, {"delay_norm", type number}, {"total_clicks_log", type number}, {"active_days_log", type number}, {"early_engagement_log", type number}, {"engagement_intensity_log", type number}, {"engagement_intensity", type number}, {"assessment_discipline", type number}, {"persistence_score", type number}, {"learning_risk_index", type number}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "EnrollmentKey", each Text.From([id_student]) & "|" & [code_module] & "|" & [code_presentation]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"EnrollmentKey", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

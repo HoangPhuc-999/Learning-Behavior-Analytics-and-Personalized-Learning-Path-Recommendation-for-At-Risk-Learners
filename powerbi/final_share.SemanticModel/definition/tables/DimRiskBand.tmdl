@@ -1,0 +1,38 @@
+table DimRiskBand
+	lineageTag: 60a9dbd1-a291-4f90-99b7-ddeba7d72bc2
+
+	column risk_band
+		lineageTag: d4ddbc32-ae9f-4e7b-9495-b6a05b183c04
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [risk_band]
+		sortByColumn: RiskBandSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column RiskBandSort
+		formatString: 0
+		lineageTag: a25f0742-ffd6-4364-b4fb-b754aa2a4732
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [RiskBandSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimRiskBand = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "risk_band", STRING,
+				    "RiskBandSort", INTEGER,
+				    {
+				        {"Low", 1},
+				        {"Medium", 2},
+				        {"High", 3},
+				        {"Critical", 4}
+				    }
+				)
+
+	annotation PBI_Id = 8f3680246c8b4b228c5e0e187968d311
+

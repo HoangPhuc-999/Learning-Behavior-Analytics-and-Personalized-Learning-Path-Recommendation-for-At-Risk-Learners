@@ -1,0 +1,230 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "8b12e1c5ee1b7e38a036",
+  "position": {
+    "x": 48.148148148148145,
+    "y": 358.02469135802465,
+    "z": 31000,
+    "height": 222.2222222222222,
+    "width": 765.4320987654321,
+    "tabOrder": 27000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "id_student"
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.id_student)",
+              "nativeQueryRef": "ID",
+              "displayName": "ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "code_module"
+                }
+              },
+              "queryRef": "champion_test_predictions.code_module",
+              "nativeQueryRef": "Module",
+              "displayName": "Module"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "code_presentation"
+                }
+              },
+              "queryRef": "champion_test_predictions.code_presentation",
+              "nativeQueryRef": "Code presentation",
+              "displayName": "Code presentation"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "cluster_label"
+                }
+              },
+              "queryRef": "champion_test_predictions.cluster_label",
+              "nativeQueryRef": "Label",
+              "displayName": "Label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "risk_band"
+                }
+              },
+              "queryRef": "champion_test_predictions.risk_band",
+              "nativeQueryRef": "Risk band",
+              "displayName": "Risk band"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "risk_probability"
+                }
+              },
+              "queryRef": "Sum(champion_test_predictions.risk_probability)",
+              "nativeQueryRef": "Risk probability",
+              "displayName": "Risk probability"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "champion_test_predictions"
+                    }
+                  },
+                  "Property": "recommended_path"
+                }
+              },
+              "queryRef": "champion_test_predictions.recommended_path",
+              "nativeQueryRef": "Recommended Path",
+              "displayName": "Recommended Path"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Prioritized At-Risk Learner Watchlist'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6202cf9cf2a21652f0d3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "champion_test_predictions"
+              }
+            },
+            "Property": "y_pred"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "champion_test_predictions",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "y_pred"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

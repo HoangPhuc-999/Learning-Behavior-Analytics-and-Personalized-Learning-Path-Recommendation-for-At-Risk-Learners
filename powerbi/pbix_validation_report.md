@@ -1,8 +1,8 @@
 # Power BI PBIX Validation Report
 
-Validated file: `powerbi/final_decision_dashboard.pbix`
+Validated file: `powerbi/final_share.pbix`
 
-Source file checked: `/Users/haaminh109/Downloads/final_share.pbix`
+Source file checked: `powerbi/final_share.pbix`
 
 Validation date: `2026-05-09`
 

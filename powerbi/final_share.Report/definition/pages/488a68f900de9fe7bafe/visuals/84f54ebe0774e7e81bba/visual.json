@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "84f54ebe0774e7e81bba",
+  "position": {
+    "x": 1107.4074074074074,
+    "y": 369.1358024691358,
+    "z": 34000,
+    "height": 237.037037037037,
+    "width": 462.96296296296293,
+    "tabOrder": 24000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimRiskBand"
+                    }
+                  },
+                  "Property": "risk_band"
+                }
+              },
+              "queryRef": "DimRiskBand.risk_band",
+              "nativeQueryRef": "risk_band",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "risk_band_summary"
+                        }
+                      },
+                      "Property": "n"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(risk_band_summary.n)",
+              "nativeQueryRef": "Learners",
+              "displayName": "Learners"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "risk_band_summary"
+                        }
+                      },
+                      "Property": "actual_at_risk_rate"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(risk_band_summary.actual_at_risk_rate)",
+              "nativeQueryRef": "At-risk Rate",
+              "displayName": "At-risk Rate"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Risk Bands Are Well Ordered'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,56 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["features_final","segment_assignments","personalized_learning_paths","cluster_profiles","cluster_success_activity_profile","features_horizon_metadata","model_horizon_comparison","selected_operating_points","threshold_search_by_horizon","champion_test_metrics","champion_test_predictions","risk_band_summary","risk_band_test_predictions","calibration_summary","ablation_results","ablation_gain_summary","model_feature_importance","segment_model_performance","outcome_risk_summary","champion_metric_bootstrap_ci","subgroup_model_performance","risk_signal_trajectory","threshold_cost_benefit","ab_test_experiment_design","ab_test_assignment","ab_test_srm_check","ab_test_balance","ab_test_power_analysis","ab_test_simulated_results","_Measures","_Measures (2)","__Measure","Playbook Table","cluster_profiles_long","MetricGlossary","student_info_clean"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table features_final
+ref table segment_assignments
+ref table personalized_learning_paths
+ref table cluster_profiles
+ref table cluster_success_activity_profile
+ref table features_horizon_metadata
+ref table model_horizon_comparison
+ref table selected_operating_points
+ref table threshold_search_by_horizon
+ref table champion_test_metrics
+ref table champion_test_predictions
+ref table risk_band_summary
+ref table risk_band_test_predictions
+ref table calibration_summary
+ref table ablation_results
+ref table ablation_gain_summary
+ref table model_feature_importance
+ref table segment_model_performance
+ref table outcome_risk_summary
+ref table champion_metric_bootstrap_ci
+ref table subgroup_model_performance
+ref table risk_signal_trajectory
+ref table threshold_cost_benefit
+ref table ab_test_experiment_design
+ref table ab_test_assignment
+ref table ab_test_srm_check
+ref table ab_test_balance
+ref table ab_test_power_analysis
+ref table ab_test_simulated_results
+ref table DimOutcome
+ref table DimRiskBand
+ref table DimHorizon
+ref table DimSegment
+ref table DimRecommendationPath
+ref table __Measure
+ref table 'Playbook Table'
+ref table cluster_profiles_long
+ref table MetricGlossary
+ref table student_info_clean
+
+ref cultureInfo en-US
+

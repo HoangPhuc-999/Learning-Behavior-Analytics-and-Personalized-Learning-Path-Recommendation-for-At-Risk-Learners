@@ -1,0 +1,191 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "78acaee11cc8c11ae91d",
+  "position": {
+    "x": 466.05672461116194,
+    "y": 363.95242451967061,
+    "z": 33000,
+    "height": 251.96706312900275,
+    "width": 370.53979871912168,
+    "tabOrder": 28000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimOutcome"
+                    }
+                  },
+                  "Property": "final_result"
+                }
+              },
+              "queryRef": "DimOutcome.final_result",
+              "nativeQueryRef": "Final Outcome",
+              "active": true,
+              "displayName": "Final Outcome"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__Measure"
+                    }
+                  },
+                  "Property": "Avg Score"
+                }
+              },
+              "queryRef": "__Measure.Avg Score",
+              "nativeQueryRef": "Avg Score"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__Measure"
+                    }
+                  },
+                  "Property": "Avg Completion Ratio"
+                }
+              },
+              "queryRef": "__Measure.Avg Completion Ratio",
+              "nativeQueryRef": "Avg Completion Ratio"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "secStart": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Assessment Quality by Outcome'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading4'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9776beedf3fd679ceba0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimOutcome"
+              }
+            },
+            "Property": "final_result"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2585cec75595ef77d439",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__Measure"
+              }
+            },
+            "Property": "Avg Score"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f74864b1155c226384d9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__Measure"
+              }
+            },
+            "Property": "Avg Completion Ratio"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

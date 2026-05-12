@@ -1,0 +1,300 @@
+relationship AutoDetected_775bd9b6-95f9-4080-a97e-0bc6ab680e88
+	fromColumn: features_final.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_0587d512-bd20-4c41-869e-1924f3215735
+	isActive: false
+	fromColumn: model_horizon_comparison.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_7b058e8e-e6b7-48b3-9282-e8854f36d035
+	isActive: false
+	fromColumn: selected_operating_points.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_328d9cf9-c4bd-4345-b66c-f87432f7432c
+	fromColumn: threshold_search_by_horizon.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_1313f768-706b-4d9b-be5b-128aab2aab63
+	fromColumn: champion_test_metrics.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_d440b980-b5e3-41e6-939d-d5dea2e880ec
+	fromColumn: champion_test_predictions.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_f82d0b35-d097-4d8c-8cdf-669aef6f4ca7
+	fromColumn: risk_band_test_predictions.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_8a892569-d73c-46c3-8fb8-8d492d486339
+	isActive: false
+	fromColumn: calibration_summary.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_62ebda81-3424-4429-9da8-c4fe60b545fc
+	isActive: false
+	fromColumn: ablation_results.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_e4804254-ada7-40f5-ae80-210fa0c127ee
+	fromColumn: ablation_gain_summary.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_c16dcfa8-f3b1-4127-b0c6-0ca6bf32f135
+	fromColumn: model_feature_importance.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_454e2768-6fb1-4521-a197-cacc4d5c316b
+	isActive: false
+	fromColumn: risk_signal_trajectory.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_cf075f19-c5a4-4a62-afe0-a736acb29e1f
+	fromColumn: threshold_cost_benefit.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_c92d054f-f543-4f6e-8d9b-c7c9dd083c85
+	fromColumn: ab_test_assignment.horizon_day
+	toColumn: features_horizon_metadata.horizon_day
+
+relationship AutoDetected_e2c00d93-c85f-4376-a1a8-b822ed4d2343
+	fromColumn: features_final.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_5dd289bc-cd5c-4aa7-b0da-0e72abe874ef
+	fromColumn: segment_assignments.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_98186e0a-a20a-4140-a175-b756a1b9c033
+	fromColumn: personalized_learning_paths.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_1c6122a3-6d99-417f-8aac-8891c45be197
+	fromColumn: champion_test_predictions.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_80b82dbc-99bc-4f3b-9d0e-3182f56f7bb6
+	fromColumn: risk_band_test_predictions.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_70c8119b-a6b2-434f-a0a6-be81e6a7cb9f
+	fromColumn: ab_test_assignment.final_result
+	toColumn: outcome_risk_summary.final_result
+
+relationship AutoDetected_287e064e-dc7b-498e-9dfb-4299ed0aa50e
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: segment_assignments.EnrollmentKey
+	toColumn: features_final.EnrollmentKey
+
+relationship AutoDetected_7fe6b4d0-ac42-468d-8c36-78f77c0e1216
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: personalized_learning_paths.EnrollmentKey
+	toColumn: features_final.EnrollmentKey
+
+relationship AutoDetected_a294e222-3c14-42e1-87d6-7a0ac386b591
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: champion_test_predictions.EnrollmentKey
+	toColumn: features_final.EnrollmentKey
+
+relationship AutoDetected_6f9aa175-871f-4086-a176-7911b03d7888
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: risk_band_test_predictions.EnrollmentKey
+	toColumn: features_final.EnrollmentKey
+
+relationship AutoDetected_414ba722-f402-4103-b627-5d1c6d934a07
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: ab_test_assignment.EnrollmentKey
+	toColumn: features_final.EnrollmentKey
+
+relationship AutoDetected_15ec6a21-79f9-4d2b-a02a-17096e1f24a9
+	isActive: false
+	fromColumn: segment_assignments.cluster_id
+	toColumn: cluster_profiles.cluster_id
+
+relationship AutoDetected_bb352a7b-165a-428e-bbb1-2697eb4b2684
+	isActive: false
+	fromColumn: personalized_learning_paths.cluster_id
+	toColumn: cluster_profiles.cluster_id
+
+relationship AutoDetected_44e93758-e6e7-449b-89f1-f00da990d2ad
+	fromColumn: cluster_success_activity_profile.cluster_label
+	toColumn: cluster_profiles.cluster_label
+
+relationship AutoDetected_c5025870-0aa9-4364-a99c-1d7f061c6ca4
+	isActive: false
+	fromColumn: champion_test_predictions.cluster_label
+	toColumn: cluster_profiles.cluster_label
+
+relationship AutoDetected_61b5c9d5-f777-4168-90dd-cb9bec3ea928
+	fromColumn: risk_band_test_predictions.cluster_label
+	toColumn: cluster_profiles.cluster_label
+
+relationship AutoDetected_b2776be4-518b-498e-9995-7b92acd9d402
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: segment_model_performance.cluster_label
+	toColumn: cluster_profiles.cluster_label
+
+relationship AutoDetected_1fd49677-e037-449d-951f-f3612d04b5a5
+	fromColumn: ab_test_assignment.cluster_label
+	toColumn: cluster_profiles.cluster_label
+
+relationship AutoDetected_91c1c62c-bf4b-4c9c-bc74-c749f66b516e
+	isActive: false
+	fromColumn: selected_operating_points.threshold
+	toColumn: threshold_cost_benefit.threshold
+
+relationship AutoDetected_0e54a5cf-5346-437b-993f-6eec5ef83654
+	isActive: false
+	fromColumn: champion_test_metrics.threshold
+	toColumn: threshold_cost_benefit.threshold
+
+relationship AutoDetected_6bd92c85-4795-4765-a7a4-47f43f1b5879
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: champion_test_metrics.accuracy
+	toColumn: selected_operating_points.accuracy
+
+relationship AutoDetected_b2b59e47-9316-4c27-b864-bd5f8a4895a3
+	isActive: false
+	fromColumn: calibration_summary.brier_score
+	toColumn: champion_test_metrics.brier_score
+
+relationship AutoDetected_09a6f70c-7009-4f63-8689-559413f24eb4
+	isActive: false
+	fromColumn: champion_test_predictions.risk_band
+	toColumn: risk_band_summary.risk_band
+
+relationship AutoDetected_6a9d07d8-7b8b-4aab-bfc7-0dd52f269b09
+	isActive: false
+	fromColumn: risk_band_test_predictions.risk_band
+	toColumn: risk_band_summary.risk_band
+
+relationship AutoDetected_40b7d5dd-953a-4780-9948-d5d038b86d57
+	fromColumn: ab_test_assignment.risk_band
+	toColumn: risk_band_summary.risk_band
+
+relationship AutoDetected_37abe63d-527d-472a-ae7c-daad921adeb9
+	isActive: false
+	fromColumn: risk_signal_trajectory.feature
+	toColumn: model_feature_importance.feature
+
+relationship AutoDetected_547310c6-a177-45c2-8ae8-82c14674c598
+	fromColumn: ab_test_assignment.experiment_id
+	toColumn: ab_test_srm_check.experiment_id
+
+relationship AutoDetected_210e8abd-e3bc-4e05-a1bc-3c90640baad7
+	fromColumn: ab_test_power_analysis.experiment_id
+	toColumn: ab_test_srm_check.experiment_id
+
+relationship AutoDetected_dc09a082-fb97-4aee-abbc-578f808646b7
+	fromColumn: ab_test_simulated_results.experiment_id
+	toColumn: ab_test_srm_check.experiment_id
+
+relationship 316ffb25-fbe2-9926-a7f0-5307c1a8cc12
+	fromColumn: features_final.final_result
+	toColumn: DimOutcome.final_result
+
+relationship 75c24e9b-dbc6-e207-1906-84555443dcda
+	fromColumn: segment_assignments.final_result
+	toColumn: DimOutcome.final_result
+
+relationship ac78e3d2-cd52-2c52-ac05-5393cd8c8914
+	fromColumn: personalized_learning_paths.final_result
+	toColumn: DimOutcome.final_result
+
+relationship faf3eb23-1738-d468-4891-87b42f7e0e4b
+	fromColumn: segment_assignments.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship 7e89ce7d-cf06-e351-a2b7-fbd2cb3bf0cf
+	fromColumn: personalized_learning_paths.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship 86b388b8-2de5-5da3-4954-c0c62203f5a9
+	fromColumn: champion_test_predictions.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship fdc96cb6-628d-41e4-0f79-e3a655edc7f9
+	fromColumn: segment_model_performance.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship ca9bbc1e-f009-6d0d-8f14-620493d53177
+	fromColumn: cluster_profiles.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship f0041bc8-c4d6-50e1-d189-7d4ebefccf27
+	fromColumn: risk_band_summary.risk_band
+	toColumn: DimRiskBand.risk_band
+
+relationship 8259cdf1-15b4-2a5f-8a82-22562b67c22c
+	fromColumn: risk_band_test_predictions.risk_band
+	toColumn: DimRiskBand.risk_band
+
+relationship e73aa5b0-5ad5-48b0-f79b-2ffb560daf35
+	fromColumn: champion_test_predictions.risk_band
+	toColumn: DimRiskBand.risk_band
+
+relationship b713becc-dd75-e84f-1ed9-1cea1b9306f6
+	fromColumn: model_horizon_comparison.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship 8ea05a87-588b-2e9f-b8f9-09659d01db98
+	fromColumn: selected_operating_points.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship 91af7606-ad4a-c48c-412e-7506c7636c81
+	fromColumn: features_horizon_metadata.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship 5988fe10-54f8-0e1a-1be3-307f779c679e
+	fromColumn: calibration_summary.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship 8bb8d441-d072-8386-cfbd-09d532dd157c
+	fromColumn: ablation_results.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship AutoDetected_0557e18e-0e0e-4f14-88ce-bd4b3801b13d
+	isActive: false
+	fromColumn: threshold_search_by_horizon.threshold
+	toColumn: threshold_cost_benefit.threshold
+
+relationship 58b801f4-bc7b-df91-f52f-db493d88cb39
+	fromColumn: personalized_learning_paths.recommended_path
+	toColumn: DimRecommendationPath.recommended_path
+
+relationship dcf7ff50-946c-ff86-5bde-680bbc668d9a
+	fromColumn: risk_signal_trajectory.horizon_day
+	toColumn: DimHorizon.horizon_day
+
+relationship AutoDetected_905c0e94-a81c-445c-ae68-db7a10794384
+	fromColumn: cluster_profiles_long.cluster_label
+	toColumn: DimSegment.cluster_label
+
+relationship AutoDetected_46538109-77c9-4e2e-aa4e-4f1697a1b30f
+	fromColumn: ab_test_experiment_design.experiment_id
+	toColumn: ab_test_srm_check.experiment_id
+
+relationship AutoDetected_d4236339-3539-44b9-a90e-4687bff3e79a
+	fromColumn: threshold_search_by_horizon.metric
+	toColumn: MetricGlossary.Metric
+
+relationship AutoDetected_4864522d-86fe-495c-8bab-1093b48c3734
+	fromColumn: student_info_clean.final_result
+	toColumn: outcome_risk_summary.final_result
+

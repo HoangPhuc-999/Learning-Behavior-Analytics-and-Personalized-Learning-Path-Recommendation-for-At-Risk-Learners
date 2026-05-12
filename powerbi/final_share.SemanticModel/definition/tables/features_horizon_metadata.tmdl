@@ -1,0 +1,140 @@
+table features_horizon_metadata
+	lineageTag: 388109c7-169a-4b72-a643-d208f8a48e75
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d4d0ed2-f6c9-44b3-a28e-165c4ed981ea
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column rows
+		dataType: int64
+		formatString: 0
+		lineageTag: 2579372f-3ce3-4040-a1ce-c7dad51dfb79
+		summarizeBy: sum
+		sourceColumn: rows
+
+		annotation SummarizationSetBy = Automatic
+
+	column raw_missing_pct_pre_imputation
+		dataType: double
+		lineageTag: c6f963fc-58ff-466d-9231-2b76589afcfc
+		summarizeBy: sum
+		sourceColumn: raw_missing_pct_pre_imputation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column post_imputation_missing_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: cf3c55da-8351-4ae3-86e2-6ab4ee83e15a
+		summarizeBy: sum
+		sourceColumn: post_imputation_missing_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_activity_rate
+		dataType: double
+		lineageTag: 4a9c7e5a-22cc-41c0-a383-12b61b3da694
+		summarizeBy: sum
+		sourceColumn: observed_activity_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column submission_coverage
+		dataType: double
+		lineageTag: 2b003df2-bc9f-4340-aa76-c303f6491a67
+		summarizeBy: sum
+		sourceColumn: submission_coverage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column score_coverage
+		dataType: double
+		lineageTag: 4bc877b5-2d8e-44b8-baf6-dc35021541f0
+		summarizeBy: sum
+		sourceColumn: score_coverage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column available_assessment_rate
+		dataType: double
+		lineageTag: 087b8e86-b129-4621-9ed2-463d14265a95
+		summarizeBy: sum
+		sourceColumn: available_assessment_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delay_imputation_value
+		dataType: int64
+		formatString: 0
+		lineageTag: d4dbabb7-af22-49c0-b7b2-9f62ada91d13
+		summarizeBy: sum
+		sourceColumn: delay_imputation_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column at_risk_rate
+		dataType: double
+		lineageTag: 18afbee1-d0b3-4b52-9484-507e54a8b396
+		summarizeBy: sum
+		sourceColumn: at_risk_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column prediction_columns
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c59ae83-5680-4085-affc-942032e3b305
+		summarizeBy: sum
+		sourceColumn: prediction_columns
+
+		annotation SummarizationSetBy = Automatic
+
+	column numeric_model_features
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b960fcb-b9cb-4169-b3a9-fc4c26abd13a
+		summarizeBy: sum
+		sourceColumn: numeric_model_features
+
+		annotation SummarizationSetBy = Automatic
+
+	column categorical_dummy_features
+		dataType: int64
+		formatString: 0
+		lineageTag: 44323816-b7e3-4ef7-94cb-6d028fab6d4d
+		summarizeBy: sum
+		sourceColumn: categorical_dummy_features
+
+		annotation SummarizationSetBy = Automatic
+
+	partition features_horizon_metadata = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\features_horizon_metadata.csv"),[Delimiter=",", Columns=13, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"horizon_day", Int64.Type}, {"rows", Int64.Type}, {"raw_missing_pct_pre_imputation", type number}, {"post_imputation_missing_pct", Int64.Type}, {"observed_activity_rate", type number}, {"submission_coverage", type number}, {"score_coverage", type number}, {"available_assessment_rate", type number}, {"delay_imputation_value", Int64.Type}, {"at_risk_rate", type number}, {"prediction_columns", Int64.Type}, {"numeric_model_features", Int64.Type}, {"categorical_dummy_features", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

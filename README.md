@@ -13,10 +13,11 @@ For grading, start with these files:
 - `data/processed/`: exported research, recommendation, dashboard, and A/B testing tables
 - `reports/final_report_handoff.md`: report-ready storyline and defense notes
 - `reports/final_submission_checklist.md`: final verification checklist
-- `powerbi/final_decision_dashboard.pbix`: final Power BI dashboard
+- `powerbi/final_share.pbix`: final Power BI dashboard
+- `powerbi/final_share.pbip`: editable Power BI project source
 - `powerbi/`: Power BI storyboard, data dictionary, DAX catalog, PBIX validation report, and build handoff
 
-Final verification snapshot on `2026-05-09`:
+Final verification snapshot on `2026-05-12`:
 
 - `make validate`: passed
 - `make test`: passed, `23` tests run with `2` notebook integration tests skipped by default
@@ -318,7 +319,8 @@ make report
 
 The repository includes the full research dashboard handoff:
 
-- final Power BI Desktop file: `powerbi/final_decision_dashboard.pbix`,
+- final Power BI Desktop file: `powerbi/final_share.pbix`,
+- editable Power BI project source: `powerbi/final_share.pbip`,
 - updated storyboard,
 - data dictionary,
 - PBIX validation report,

@@ -1,0 +1,87 @@
+table calibration_summary
+	lineageTag: b9120c57-e3b2-480f-94ba-23dee9fd9c48
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f0220f8-74d6-41af-a6ef-e605e968852f
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: a1372e36-6d55-419c-b995-37400ad569c8
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column split
+		dataType: string
+		lineageTag: b32977fe-15db-4d9e-8efa-ef1d5fc4e1c4
+		summarizeBy: none
+		sourceColumn: split
+
+		annotation SummarizationSetBy = Automatic
+
+	column probability_bin
+		dataType: string
+		lineageTag: 6f12257d-849c-47bd-aeba-8cf7339dc481
+		summarizeBy: none
+		sourceColumn: probability_bin
+
+		annotation SummarizationSetBy = Automatic
+
+	column n
+		dataType: int64
+		formatString: 0
+		lineageTag: f40f468e-820c-4c0e-94fd-de009ed2b4e1
+		summarizeBy: sum
+		sourceColumn: n
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_predicted_probability
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7a99ab2a-1a6b-491f-9c05-cd86f641e838
+		summarizeBy: sum
+		sourceColumn: avg_predicted_probability
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_at_risk_rate
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1bc7167f-59db-4dd0-91ad-61f02cd37760
+		summarizeBy: sum
+		sourceColumn: observed_at_risk_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column brier_score
+		dataType: double
+		lineageTag: 5d3eaaa2-a45f-44fb-9dc8-b55e7b6887a7
+		summarizeBy: sum
+		sourceColumn: brier_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition calibration_summary = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\calibration_summary.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"horizon_day", Int64.Type}, {"model", type text}, {"split", type text}, {"probability_bin", type text}, {"n", Int64.Type}, {"avg_predicted_probability", type number}, {"observed_at_risk_rate", type number}, {"brier_score", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

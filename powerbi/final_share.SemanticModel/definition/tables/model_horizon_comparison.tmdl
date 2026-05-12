@@ -1,0 +1,249 @@
+table model_horizon_comparison
+	lineageTag: b55db889-fbde-4847-841f-c847dcb8f1d2
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 0662214b-35bd-4660-a489-14ab1ed055c5
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: 0d807f18-3a6c-402e-85b8-1103b6e76f06
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column selected_threshold
+		dataType: double
+		lineageTag: 343c99d3-c3cd-4801-9ae3-e31b59a2a9ae
+		summarizeBy: sum
+		sourceColumn: selected_threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_accuracy
+		dataType: double
+		lineageTag: dfcb63f9-e4e1-4fbc-9ae3-94aa11ec2ce1
+		summarizeBy: sum
+		sourceColumn: validation_accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_precision
+		dataType: double
+		lineageTag: 1a0a3b00-ab3c-4f69-af49-76592be49433
+		summarizeBy: sum
+		sourceColumn: validation_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_recall
+		dataType: double
+		lineageTag: f37925a5-1ff5-4c39-b137-6727746b7bc4
+		summarizeBy: sum
+		sourceColumn: validation_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_f1
+		dataType: double
+		lineageTag: 33fe7076-3587-43fb-90e8-c5c8c0ca477b
+		summarizeBy: sum
+		sourceColumn: validation_f1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_f2
+		dataType: double
+		lineageTag: 6f09fda2-5693-4d0d-be05-62391acff722
+		summarizeBy: sum
+		sourceColumn: validation_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_roc_auc
+		dataType: double
+		lineageTag: 7201f593-0c6e-4310-b919-b84746954422
+		summarizeBy: sum
+		sourceColumn: validation_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_pr_auc
+		dataType: double
+		lineageTag: 977ecc22-863f-42cc-9bd5-d7663f640878
+		summarizeBy: sum
+		sourceColumn: validation_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_brier_score
+		dataType: double
+		lineageTag: b7c7a25c-133a-4b26-8e70-14c6f17083ec
+		summarizeBy: sum
+		sourceColumn: validation_brier_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column meets_target_recall
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bae073c0-efb1-4e5f-929b-71ccf0c1678f
+		summarizeBy: none
+		sourceColumn: meets_target_recall
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_accuracy
+		dataType: double
+		lineageTag: 5d891716-fe99-493f-a2d3-bace656c7c51
+		summarizeBy: sum
+		sourceColumn: test_accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_precision
+		dataType: double
+		lineageTag: cc3e8cd4-0979-4741-8281-36c0a26067be
+		summarizeBy: sum
+		sourceColumn: test_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_recall
+		dataType: double
+		lineageTag: 9dbf9778-a32b-4875-a8df-f00b2b21e957
+		summarizeBy: sum
+		sourceColumn: test_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_f1
+		dataType: double
+		lineageTag: 3b70979d-b94e-4076-80cb-8742d4a4532e
+		summarizeBy: sum
+		sourceColumn: test_f1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_f2
+		dataType: double
+		lineageTag: 7ce90e8d-bcfc-4b55-8bbe-130bc7f39929
+		summarizeBy: sum
+		sourceColumn: test_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_roc_auc
+		dataType: double
+		lineageTag: 34ad05d1-7f7b-4d70-9c91-6392e1daedca
+		summarizeBy: sum
+		sourceColumn: test_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_pr_auc
+		dataType: double
+		lineageTag: 5e15d07b-151c-4070-9a46-a55df92d9afd
+		summarizeBy: sum
+		sourceColumn: test_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_brier_score
+		dataType: double
+		lineageTag: cc5f8551-29fa-4628-b952-76945151d09a
+		summarizeBy: sum
+		sourceColumn: test_brier_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_tn
+		dataType: int64
+		formatString: 0
+		lineageTag: 54f18a55-9798-45c7-b437-47538f73e703
+		summarizeBy: sum
+		sourceColumn: test_tn
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_fp
+		dataType: int64
+		formatString: 0
+		lineageTag: 44d14735-e496-4660-92ea-3910990ef6af
+		summarizeBy: sum
+		sourceColumn: test_fp
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_fn
+		dataType: int64
+		formatString: 0
+		lineageTag: 18e0cdd8-2836-4a01-b75a-4a1a5d4e6458
+		summarizeBy: sum
+		sourceColumn: test_fn
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_tp
+		dataType: int64
+		formatString: 0
+		lineageTag: 12159ff3-85cc-4c74-a3c1-b97c83db0930
+		summarizeBy: sum
+		sourceColumn: test_tp
+
+		annotation SummarizationSetBy = Automatic
+
+	partition model_horizon_comparison = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\model_horizon_comparison.csv"),[Delimiter=",", Columns=24, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"horizon_day", Int64.Type}, {"model", type text}, {"selected_threshold", type number}, {"validation_accuracy", type number}, {"validation_precision", type number}, {"validation_recall", type number}, {"validation_f1", type number}, {"validation_f2", type number}, {"validation_roc_auc", type number}, {"validation_pr_auc", type number}, {"validation_brier_score", type number}, {"meets_target_recall", type logical}, {"test_accuracy", type number}, {"test_precision", type number}, {"test_recall", type number}, {"test_f1", type number}, {"test_f2", type number}, {"test_roc_auc", type number}, {"test_pr_auc", type number}, {"test_brier_score", type number}, {"test_tn", Int64.Type}, {"test_fp", Int64.Type}, {"test_fn", Int64.Type}, {"test_tp", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

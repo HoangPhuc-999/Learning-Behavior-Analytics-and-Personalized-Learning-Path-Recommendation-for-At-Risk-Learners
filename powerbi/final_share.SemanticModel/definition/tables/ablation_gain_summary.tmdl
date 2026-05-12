@@ -1,0 +1,346 @@
+table ablation_gain_summary
+	lineageTag: bc830123-14ff-4d80-97d1-ee1bf7c2ab22
+
+	column horizon_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e1914d1-1f25-4f6b-bbb7-90e06fdafd98
+		summarizeBy: none
+		sourceColumn: horizon_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: 36d1c1ec-ec22-4ead-a54a-8610a8ef7da3
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column feature_group
+		dataType: string
+		lineageTag: 115f10ee-5262-4f08-9271-f49444cb42f6
+		summarizeBy: none
+		sourceColumn: feature_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column feature_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d73d137-c3e0-4734-9e17-9ecb01b4460f
+		summarizeBy: sum
+		sourceColumn: feature_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column selected_threshold
+		dataType: double
+		lineageTag: 11519c65-b7df-4bc6-b58e-4669d244d4eb
+		summarizeBy: sum
+		sourceColumn: selected_threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_precision
+		dataType: double
+		lineageTag: fe07e673-2482-4045-950c-7497408d5e48
+		summarizeBy: sum
+		sourceColumn: validation_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_recall
+		dataType: double
+		lineageTag: 0d7922c8-68e6-4084-83fd-ef8721288f93
+		summarizeBy: sum
+		sourceColumn: validation_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_f2
+		dataType: double
+		lineageTag: b042aaf8-cd03-4fb7-80ca-18d06295d811
+		summarizeBy: sum
+		sourceColumn: validation_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_roc_auc
+		dataType: double
+		lineageTag: e83be4be-b1ef-4883-898e-bf18057444fd
+		summarizeBy: sum
+		sourceColumn: validation_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validation_pr_auc
+		dataType: double
+		lineageTag: 9a342fbe-b0af-444a-b811-617e8412176a
+		summarizeBy: sum
+		sourceColumn: validation_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_precision
+		dataType: double
+		lineageTag: 3a0b9583-3790-4c89-8adc-b16c808f6d0e
+		summarizeBy: sum
+		sourceColumn: test_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_recall
+		dataType: double
+		lineageTag: a0bf9837-82bd-44af-bc0c-803835a9e68c
+		summarizeBy: sum
+		sourceColumn: test_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_f2
+		dataType: double
+		lineageTag: 1c607705-bb3b-4fb4-83be-6a3091106908
+		summarizeBy: sum
+		sourceColumn: test_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_roc_auc
+		dataType: double
+		lineageTag: f9db09ab-75b8-49eb-9df0-9cc88544a237
+		summarizeBy: sum
+		sourceColumn: test_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column test_pr_auc
+		dataType: double
+		lineageTag: c9676d1a-3bf3-4cf8-a6fb-70c1234b0cb9
+		summarizeBy: sum
+		sourceColumn: test_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_model
+		dataType: string
+		lineageTag: a8f7372a-13a3-4fc3-8f22-b81a8da8c37e
+		summarizeBy: none
+		sourceColumn: full_model
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_feature_group
+		dataType: string
+		lineageTag: c371a3b0-aafe-48f2-9ffb-07652a61e546
+		summarizeBy: none
+		sourceColumn: full_feature_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_feature_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c17a633-a297-43d1-930b-ba388d79abdb
+		summarizeBy: sum
+		sourceColumn: full_feature_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_selected_threshold
+		dataType: double
+		lineageTag: 93318405-dbda-483a-af18-bf7abddf6805
+		summarizeBy: sum
+		sourceColumn: full_selected_threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_validation_precision
+		dataType: double
+		lineageTag: dd8640c8-6f01-4e90-b0cb-c8bfa0692b44
+		summarizeBy: sum
+		sourceColumn: full_validation_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_validation_recall
+		dataType: double
+		lineageTag: 32fb1e8b-0557-4627-b68c-e9666b72185a
+		summarizeBy: sum
+		sourceColumn: full_validation_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_validation_f2
+		dataType: double
+		lineageTag: 4aed1292-184b-42b5-afc3-9c60c37e2bf5
+		summarizeBy: sum
+		sourceColumn: full_validation_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_validation_roc_auc
+		dataType: double
+		lineageTag: 0dae64c5-cbb5-440e-b1b4-f98bd71a2b17
+		summarizeBy: sum
+		sourceColumn: full_validation_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_validation_pr_auc
+		dataType: double
+		lineageTag: eebefa81-12ad-4489-a1e9-b18b3946585b
+		summarizeBy: sum
+		sourceColumn: full_validation_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_test_precision
+		dataType: double
+		lineageTag: e0785d07-3d25-43fa-a971-5b59d0176ec4
+		summarizeBy: sum
+		sourceColumn: full_test_precision
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_test_recall
+		dataType: double
+		lineageTag: dbcdd54c-00c9-4d72-b322-6ef07c79b9be
+		summarizeBy: sum
+		sourceColumn: full_test_recall
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_test_f2
+		dataType: double
+		lineageTag: af8b441e-80fd-4f04-a24d-fa32139c75d6
+		summarizeBy: sum
+		sourceColumn: full_test_f2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_test_roc_auc
+		dataType: double
+		lineageTag: a87ff653-606c-4c70-b495-a1b5f6c42d1a
+		summarizeBy: sum
+		sourceColumn: full_test_roc_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column full_test_pr_auc
+		dataType: double
+		lineageTag: 74f1976b-292f-45d8-9253-8f2644050a59
+		summarizeBy: sum
+		sourceColumn: full_test_pr_auc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_test_precision_vs_full
+		dataType: double
+		lineageTag: 5024c339-62a1-450e-b21a-663e87b1ac05
+		summarizeBy: sum
+		sourceColumn: delta_test_precision_vs_full
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_test_recall_vs_full
+		dataType: double
+		lineageTag: f4289c2a-6911-451f-9eb7-f0b2949dac3c
+		summarizeBy: sum
+		sourceColumn: delta_test_recall_vs_full
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_test_f2_vs_full
+		dataType: double
+		lineageTag: edce8efe-dc2d-46a8-a631-2c7a296b6b06
+		summarizeBy: sum
+		sourceColumn: delta_test_f2_vs_full
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_test_roc_auc_vs_full
+		dataType: double
+		lineageTag: 9d6bbe41-48ee-4dc3-868b-447a2717402b
+		summarizeBy: sum
+		sourceColumn: delta_test_roc_auc_vs_full
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_test_pr_auc_vs_full
+		dataType: double
+		lineageTag: 76526813-a585-463e-8d3d-65d34107ffc9
+		summarizeBy: sum
+		sourceColumn: delta_test_pr_auc_vs_full
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ablation_gain_summary = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\ablation_gain_summary.csv"),[Delimiter=",", Columns=34, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"horizon_day", Int64.Type}, {"model", type text}, {"feature_group", type text}, {"feature_count", Int64.Type}, {"selected_threshold", type number}, {"validation_precision", type number}, {"validation_recall", type number}, {"validation_f2", type number}, {"validation_roc_auc", type number}, {"validation_pr_auc", type number}, {"test_precision", type number}, {"test_recall", type number}, {"test_f2", type number}, {"test_roc_auc", type number}, {"test_pr_auc", type number}, {"full_model", type text}, {"full_feature_group", type text}, {"full_feature_count", Int64.Type}, {"full_selected_threshold", type number}, {"full_validation_precision", type number}, {"full_validation_recall", type number}, {"full_validation_f2", type number}, {"full_validation_roc_auc", type number}, {"full_validation_pr_auc", type number}, {"full_test_precision", type number}, {"full_test_recall", type number}, {"full_test_f2", type number}, {"full_test_roc_auc", type number}, {"full_test_pr_auc", type number}, {"delta_test_precision_vs_full", type number}, {"delta_test_recall_vs_full", type number}, {"delta_test_f2_vs_full", type number}, {"delta_test_roc_auc_vs_full", type number}, {"delta_test_pr_auc_vs_full", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

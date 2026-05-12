@@ -1,0 +1,116 @@
+table student_info_clean
+	lineageTag: 41384f4b-73f2-4c26-ac6c-ab9d12a78235
+
+	column code_module
+		dataType: string
+		lineageTag: d51d6c45-4c85-41e3-b229-559c65079403
+		summarizeBy: none
+		sourceColumn: code_module
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_presentation
+		dataType: string
+		lineageTag: c547572c-5b03-4662-82b4-1bed9450971f
+		summarizeBy: none
+		sourceColumn: code_presentation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_student
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a9ef435-28c1-46a0-9b89-fe6afc48e009
+		summarizeBy: sum
+		sourceColumn: id_student
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 750f8205-77a0-4c88-aec0-faeb625b2621
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 8ce93f82-d94e-4e96-976e-5f4b0a38b87a
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column highest_education
+		dataType: string
+		lineageTag: a3d0c5d9-b545-4781-bd0d-0055023ce26e
+		summarizeBy: none
+		sourceColumn: highest_education
+
+		annotation SummarizationSetBy = Automatic
+
+	column imd_band
+		dataType: string
+		lineageTag: 4f346f8d-c27d-44ef-9e77-f5b1f597aede
+		summarizeBy: none
+		sourceColumn: imd_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_band
+		dataType: string
+		lineageTag: b3cc8dad-02ae-49df-946b-68f2aedd4bd3
+		summarizeBy: none
+		sourceColumn: age_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_of_prev_attempts
+		dataType: int64
+		formatString: 0
+		lineageTag: 75d52a2f-0858-40a1-b437-b32e539a37a6
+		summarizeBy: sum
+		sourceColumn: num_of_prev_attempts
+
+		annotation SummarizationSetBy = Automatic
+
+	column studied_credits
+		dataType: int64
+		formatString: 0
+		lineageTag: 1504be9d-49cb-4fcb-a879-063541eef024
+		summarizeBy: sum
+		sourceColumn: studied_credits
+
+		annotation SummarizationSetBy = Automatic
+
+	column disability
+		dataType: string
+		lineageTag: e03af47f-00af-48e3-84ee-6bc1cb9fe57e
+		summarizeBy: none
+		sourceColumn: disability
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_result
+		dataType: string
+		lineageTag: 208d623f-7bc7-4e1f-b5a1-f39fa8b2f47f
+		summarizeBy: none
+		sourceColumn: final_result
+
+		annotation SummarizationSetBy = Automatic
+
+	partition student_info_clean = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("\\Mac\Home\Desktop\Minh\Tài liệu học tập (DSEB)\Kì 6\KHDL trong Mkt\Final Project\data\processed\student_info_clean.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"code_module", type text}, {"code_presentation", type text}, {"id_student", Int64.Type}, {"gender", type text}, {"region", type text}, {"highest_education", type text}, {"imd_band", type text}, {"age_band", type text}, {"num_of_prev_attempts", Int64.Type}, {"studied_credits", Int64.Type}, {"disability", type text}, {"final_result", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
