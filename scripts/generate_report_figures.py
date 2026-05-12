@@ -16,7 +16,7 @@ import seaborn as sns
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "processed"
-OUT = ROOT / "reports" / "figures"
+OUT = ROOT / "figures"
 
 OUT.mkdir(parents=True, exist_ok=True)
 

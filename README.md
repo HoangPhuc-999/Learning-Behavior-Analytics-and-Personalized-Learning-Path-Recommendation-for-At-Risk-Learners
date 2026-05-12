@@ -11,8 +11,7 @@ For grading, start with these files:
 - `README.md`: project overview, key results, reproduction guide, and artifact map
 - `notebooks/01_*.ipynb` to `notebooks/06_*.ipynb`: full analysis workflow
 - `data/processed/`: exported research, recommendation, dashboard, and A/B testing tables
-- `reports/final_report_handoff.md`: report-ready storyline and defense notes
-- `reports/final_submission_checklist.md`: final verification checklist
+- `figures/`: generated figures used by the final report
 - `powerbi/final_share.pbix`: final Power BI dashboard
 - `powerbi/`: Power BI storyboard, data dictionary, DAX catalog, PBIX validation report, and build handoff
 
@@ -196,11 +195,7 @@ The analytical output maps directly to a retention and engagement campaign workf
 - `src/experiments/ab_testing.py`: A/B testing design, SRM, balance, power, and simulated result logic
 - `src/models/multi_horizon_early_warning.py`: reusable multi-horizon modeling logic
 - `data/processed/`: all exported modeling, recommendation, and dashboard tables
-- `reports/final_report_handoff.md`: report-ready storyline and defense notes
-- `reports/demo_talk_track.md`: short demo script
-- `reports/final_presentation_outline.md`: final slide structure
-- `reports/final_submission_checklist.md`: final readiness checklist for submission and defense
-- `reports/grading_rubric_alignment.md`: project strengths mapped to likely grading criteria
+- `figures/`: generated report figures
 - `powerbi/dashboard_storyboard.md`: research dashboard page plan
 - `powerbi/dashboard_data_dictionary.md`: dashboard source and field guide
 - `powerbi/dax_measure_catalog.md`: DAX measure catalog for the Power BI build
