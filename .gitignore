@@ -32,6 +32,9 @@ dist/
 ~$*
 *.tmp
 **/.pbi/
+powerbi/*.pbip
+powerbi/*.Report/
+powerbi/*.SemanticModel/
 
 # Large archive files
 *.zip

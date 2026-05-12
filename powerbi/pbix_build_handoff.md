@@ -1,9 +1,8 @@
 # PBIX Build Handoff
 
-The repository now contains all source artifacts needed to assemble the research dashboard in Power BI Desktop:
+The repository now contains the final Power BI dashboard and the handoff artifacts needed to review or rebuild it in Power BI Desktop:
 
 - `final_share.pbix`
-- `final_share.pbip`
 - `dashboard_storyboard.md`
 - `dashboard_data_dictionary.md`
 - `dashboard_screenshot_pack/`
@@ -81,7 +80,3 @@ This refreshes:
 The submitted Power BI Desktop build is saved as:
 
 `powerbi/final_share.pbix`
-
-The editable Power BI project source is saved as:
-
-`powerbi/final_share.pbip`
