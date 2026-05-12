@@ -1,4 +1,4 @@
-.PHONY: feature-store modeling advanced-dashboard ab-testing research validate test test-notebooks report
+.PHONY: feature-store modeling advanced-dashboard ab-testing research validate test test-notebooks report-figures report
 
 REPORT_TEX := [GROUP 7] Final Project Report.tex
 REPORT_PDF := [GROUP 7] Final_Project_Report.pdf
@@ -28,7 +28,10 @@ test:
 test-notebooks:
 	RUN_NOTEBOOK_INTEGRATION=1 python -m unittest tests.test_notebook_execution -v
 
-report:
+report-figures:
+	python scripts/generate_report_figures.py
+
+report: report-figures
 	mkdir -p "$(REPORT_BUILD_DIR)"
 	tectonic --outdir "$(REPORT_BUILD_DIR)" "$(REPORT_TEX)"
 	cp "$(REPORT_BUILD_DIR)/[GROUP 7] Final Project Report.pdf" "$(REPORT_PDF)"

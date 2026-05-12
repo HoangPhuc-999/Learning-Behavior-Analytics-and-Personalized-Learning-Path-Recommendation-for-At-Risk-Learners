@@ -16,6 +16,8 @@
 \usepackage{float}
 \usepackage{balance}
 
+\graphicspath{{reports/figures/}}
+
 \renewcommand{\arraystretch}{1.15}
 \setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt}
 \setlist[enumerate]{leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt}
@@ -123,6 +125,8 @@ The project uses seven core OULAD tables, grouped by analytical role:
 \end{itemize}
 \par}
 
+Table~\ref{tab:final-result} summarizes the final learning outcomes that define the analytical problem and the later \risk{} target.
+
 \begin{table}[H]
 \centering
 \footnotesize
@@ -154,6 +158,13 @@ The target variable for the \risk{} branch is defined as follows:
 
 Under this definition, the overall \risk{} rate is 52.8\%. This is a large proportion, showing that non-completion risk is not an exceptional event but a substantial operational problem.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig01_outcome_distribution.png}
+\caption{Final outcome distribution and the operational at-risk definition.}
+\label{fig:outcome-distribution}
+\end{figure}
+
 %--------------------------------------------------
 \section{Data Preprocessing and Integration}
 
@@ -172,7 +183,7 @@ Table & Raw rows & Columns & Main checks and cleaning operations \\
 \midrule
 \texttt{courses} & 22 & 3 & No missing values or duplicates; used as the course and presentation-length description table. \\
 \texttt{studentInfo} & 32,593 & 12 & No duplicates; \texttt{imd\_band} has 1,111 missing values, equal to 3.41\%, and is retained/standardized for subgroup analysis. \\
-\texttt{studentRegistration} & 32,593 & 5 & \texttt{date\_registration} has 45 missing values and is filled using the module-presentation median; \texttt{date\_unregistration} has 22,521 missing values because many learners did not withdraw; 21 invalid date relationships are fixed by setting the withdrawal date to missing. \\
+\texttt{studentRegistration} & 32,593 & 5 & \texttt{date\_registration} has 45 missing values and is filled using the module-presentation median; \texttt{date\_unregistration} has 22,521 missing values because many learners did not withdraw; after registration-date imputation, 21 invalid date relationships are fixed by setting the withdrawal date to missing. \\
 \texttt{vle} & 6,364 & 6 & \texttt{week\_from} and \texttt{week\_to} each have 5,243 missing values; they are filled with 0 to standardize the learning-resource catalog; 20 activity types are observed. \\
 \texttt{studentVle} & 10,655,280 & 6 & No missing values; 787,170 duplicated raw rows; 3,810,465 rows with the same student-site-day key are aggregated by summing \texttt{sum\_click}, producing 8,459,320 cleaned event rows; click outliers are audited using the IQR method but retained in aggregation because they may reflect real study intensity. \\
 \texttt{assessments} & 206 & 6 & 11 missing deadline values; deadline and weight metadata are used for assessment features. \\
@@ -206,6 +217,15 @@ A very important insight is that risky behavior appears very early. In the first
     \item \texttt{Fail}: 40 clicks;
     \item \texttt{Withdrawn}: 12 clicks.
 \end{itemize}
+
+Figure~\ref{fig:early-behavior} visualizes the same pattern and adds the assessment-score gap. Successful outcomes have both stronger early interaction and stronger early assessment evidence, while withdrawn learners show the weakest signal on both dimensions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig02_early_behavior_by_outcome.png}
+\caption{Median early behavior by final outcome.}
+\label{fig:early-behavior}
+\end{figure}
 
 This gap shows that learners who eventually withdraw are already far behind successful learners within the first two weeks. Therefore, the problem should be modeled as an early-warning system rather than only an end-of-course diagnostic. In marketing terms, day 7 and day 14 correspond to early retention-campaign activation checkpoints.
 
@@ -300,6 +320,13 @@ Focused Achievers & 2,052 & 6.3\% & 32.16\% \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig03_segment_risk_profile.png}
+\caption{Learner segment size and at-risk rate.}
+\label{fig:segment-risk-profile}
+\end{figure}
+
 \textit{Steady Progressors} is the largest segment, with relatively consistent interaction and a risk rate lower than the overall level. \textit{Sporadic Explorers} exhibit unstable behavior and need support for learning rhythm and consistency. \textit{Inactive Drop-offs} is a very high-risk segment with an \risk{} rate above 93\%, making it suitable for priority intervention. \textit{Focused Achievers} is smaller but performs better, usually requiring motivation-maintenance or advanced recommendations rather than strong risk intervention.
 
 \subsection{Behavior-Gap-Based Recommendation}
@@ -316,7 +343,7 @@ where \(A_p\) is path accessibility, \(S_{i,p}\) is fit with similar profiles, \
 RecScore_i = 100 \times (0.20A_i + 0.30S_i + 0.25E_i + 0.25C_i).
 \end{equation}
 
-The highest weight is given to similar-profile fit because recommendations should be anchored in successful-peer behavior from the same segment. Engagement fit and completion support receive equal weight because the system should consider both current learning behavior and likely ability to complete. Accessibility receives a smaller but still meaningful weight, ensuring that recommended actions are practical and connected to available learning resources. This formula is used as an interpretive framework for the dashboard; the actual output is summarized into four main recommendation paths in Table~\ref{tab:paths}.
+The highest weight is given to similar-profile fit because recommendations should be anchored in successful-peer behavior from the same segment. Engagement fit and completion support receive equal weight because the system should consider both current learning behavior and likely ability to complete. Accessibility receives a smaller but still meaningful weight, ensuring that recommended actions are practical and connected to available learning resources. This formula is used as an interpretive framework for the dashboard; Table~\ref{tab:paths} summarizes the four most common recommendation paths in the output.
 
 \begin{table}[H]
 \centering
@@ -368,20 +395,20 @@ F2-score is used because it places higher weight on recall:
 F_{2} = \frac{(1+2^2) \cdot Precision \cdot Recall}{2^2 \cdot Precision + Recall}.
 \end{equation}
 
-This rule matches the early-intervention objective: capture as many at-risk learners as possible while still controlling precision so that academic advisors are not overloaded.
+This rule matches the early-intervention objective: capture as many at-risk learners as possible while still controlling precision so that academic advisors are not overloaded. After each model receives its own operating threshold, the horizon-level summary ranks candidate model-threshold pairs primarily by recall, then PR-AUC, F2-score, and precision. This makes the summary consistent with the purpose of the system: identify the earliest high-sensitivity warning checkpoint before optimizing for ranking quality.
 
 \subsection{Multi-Horizon Comparison}
 
-Table~\ref{tab:horizon-best} presents the best model at each horizon on the validation set. The results show that day 7 already provides a useful signal: Logistic Regression achieves recall 0.9393, precision 0.5771, and PR-AUC 0.7592. From day 14 onward, XGBoost becomes the stronger option, and PR-AUC increases steadily to 0.8639 at day 30.
+Table~\ref{tab:horizon-best} presents the recall-prioritized selected model at each horizon on the validation set. The results show that day 7 already provides a useful signal: Logistic Regression achieves recall 0.9393, precision 0.5771, and PR-AUC 0.7592. From day 14 onward, XGBoost becomes the stronger option, and PR-AUC increases steadily to 0.8639 at day 30.
 
 \begin{table*}[t]
 \centering
 \footnotesize
-\caption{Best model by horizon on the validation split}
+\caption{Recall-prioritized selected model by horizon on the validation split}
 \label{tab:horizon-best}
 \begin{tabular}{l l r r r r}
 \toprule
-Horizon & Best pair & Threshold & Recall & Precision & PR-AUC \\
+Horizon & Selected pair & Threshold & Recall & Precision & PR-AUC \\
 \midrule
 Day 7 & Logistic Regression & 0.25 & 0.9393 & 0.5771 & 0.7592 \\
 Day 14 & XGBoost & 0.25 & 0.9372 & 0.5794 & 0.8012 \\
@@ -392,6 +419,13 @@ Day 30 & XGBoost & 0.25 & 0.9253 & 0.6278 & 0.8639 \\
 \end{table*}
 
 The key interpretation is that ranking quality improves over time, while recall remains high at all horizons. Day 7 is the earliest checkpoint that is usable for triage, whereas day 30 is the strongest checkpoint for priority ranking because it has much richer assessment evidence.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig04_horizon_model_quality.png}
+\caption{Validation PR-AUC and recall across model families and prediction horizons.}
+\label{fig:horizon-quality}
+\end{figure}
 
 \subsection{Champion Model}
 
@@ -470,9 +504,23 @@ Critical & 1,904 & 92.5\% & 0.922 \\
 
 Risk bands are a more operationally useful output than a single 0/1 label. In practice, academic advisors can process Critical learners first, then High, then Medium depending on available capacity. Low does not require costly intervention and can instead receive automatic nudges or self-service resources.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig05_risk_band_calibration.png}
+\caption{Actual at-risk rate and average predicted probability by risk band.}
+\label{fig:risk-band-calibration}
+\end{figure}
+
 \subsection{Most Important Signals}
 
 The variables with the highest global importance in the champion model include \texttt{avg\_score}, \texttt{studied\_credits}, \texttt{days\_since\_last}, \texttt{avg\_submission\_delay}, and \texttt{assessment\_discipline}. This confirms that the model is not learning only from clicks. Risk is formed by a combination of academic quality, recency of interaction, submission discipline, and study load.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig06_feature_importance.png}
+\caption{Top champion-model signals by permutation importance.}
+\label{fig:feature-importance}
+\end{figure}
 
 \subsection{Bootstrap Confidence Intervals}
 
@@ -513,6 +561,13 @@ Threshold 0.25 of the champion model is selected to preserve high recall. On the
 
 In Data-Driven Marketing terms, the model creates a targeting list for a retention campaign. However, the list size is an operational-capacity decision. If academic advisors are limited, the threshold should be higher to reduce review load; if the priority is to avoid missing at-risk learners, a lower threshold is reasonable. Therefore, the dashboard should report not only precision and recall but also the number of flagged learners, the false-alert rate, and expected review load per 1,000 enrollments.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig07_threshold_capacity_tradeoff.png}
+\caption{Threshold trade-off between recall, precision, and expected advisor review load.}
+\label{fig:threshold-tradeoff}
+\end{figure}
+
 %--------------------------------------------------
 \section{Power BI Dashboard and Data Storytelling}
 
@@ -522,7 +577,7 @@ The Power BI dashboard is designed as a decision-support system, not a set of di
 
 \subsection{Final Dashboard Structure}
 
-The submitted Power BI file is included as \texttt{powerbi/final\_decision\_dashboard.pbix}. To align with the course outline, the dashboard is organized around six core decision pages and two advanced defense pages. The PBIX also contains supporting drill-down and definition pages for navigation, threshold review, learner-level inspection, and metric explanation. Table~\ref{tab:dashboard} describes the report logic used for presentation.
+The submitted Power BI file is included as \texttt{powerbi/final\_share.pbix}. To align with the course outline, the dashboard is organized around six core decision pages and two advanced defense pages. The PBIX also contains supporting drill-down and definition pages for navigation, threshold review, learner-level inspection, and metric explanation. Table~\ref{tab:dashboard} describes the report logic used for presentation.
 
 \begin{table*}[t]
 \centering
@@ -558,7 +613,7 @@ The prediction model answers the question of who is at risk, but it does not pro
 
 \subsection{Experiment Design}
 
-The experiment ID is summarized as \textit{Risk Targeted Intervention A/B Test}. The randomization unit is student-course enrollment. The control group receives standard support, while the treatment group receives personalized intervention based on risk band, segment, and recommended path. The primary metric is \texttt{retention\_success}, meaning that the final outcome after intervention does not belong to the \risk{} group. Secondary metrics include recommendation score, risk probability, risk-band mix, and path uptake. Guardrails include advisor review load, false-alert ratio, and subgroup recall monitoring.
+The experiment ID is summarized as \textit{Risk Targeted Intervention A/B Test}. The randomization unit is student-course enrollment. The control group receives standard support, while the treatment group receives personalized intervention based on risk band, segment, and recommended path. The primary metric is \texttt{retention\_success}, meaning that the final outcome after intervention does not belong to the \risk{} group. Secondary metrics include recommendation score, risk probability, risk-band mix, and path uptake. Guardrails include advisor review load, false-alert ratio, and subgroup recall monitoring. Table~\ref{tab:ab} summarizes the experiment-readiness checks exported for the proposed intervention test.
 
 \begin{table}[H]
 \centering
@@ -652,7 +707,7 @@ The fourth limitation is operational rather than analytical. The Power BI dashbo
 
 The project has built a practical framework for learning behavior analytics and personalized learning path recommendation on online learning platforms. Across 32,593 OULAD enrollments, the \risk{} rate of 52.8\% shows that dropout and non-completion are major problems. EDA demonstrates that risk signals appear very early: the first-14-day median clicks of the \texttt{Withdrawn} group is only 12, far below \texttt{Pass} and \texttt{Distinction}. The multi-horizon feature store controls data leakage and clarifies the trade-off between early intervention and information quality.
 
-For Part I, segmentation creates four interpretable learning profiles: Inactive Drop-offs, Sporadic Explorers, Steady Progressors, and Focused Achievers. The recommendation layer converts behavioral gaps into four action paths: Consistency Building, Early Start, Assessment Recovery, and Mastery Improvement. For Part II, the early-warning model shows that day 7 is already a usable checkpoint, while the final champion is XGBoost @ Day 30 with threshold 0.25, achieving recall 0.9367 and PR-AUC 0.8766 on the test set. Calibration, risk bands, bootstrap CIs, subgroup diagnostics, and threshold cost-benefit analysis turn the model into an intervention-prioritization tool rather than only an offline prediction exercise.
+For Part I, segmentation creates four interpretable learning profiles: Inactive Drop-offs, Sporadic Explorers, Steady Progressors, and Focused Achievers. The recommendation layer converts behavioral gaps into action paths, with the most common paths being Consistency Building, Early Start, Assessment Recovery, and Mastery Improvement. For Part II, the early-warning model shows that day 7 is already a usable checkpoint, while the final champion is XGBoost @ Day 30 with threshold 0.25, achieving recall 0.9367 and PR-AUC 0.8766 on the test set. Calibration, risk bands, bootstrap CIs, subgroup diagnostics, and threshold cost-benefit analysis turn the model into an intervention-prioritization tool rather than only an offline prediction exercise.
 
 In the Data-Driven Marketing context, the most important result is that the project transforms learning data into a retention-intelligence system: understanding learners, segmenting them, predicting risk, recommending actions, prioritizing resources, and preparing A/B testing for impact validation. The submitted Power BI dashboard turns this framework into a practical decision-support artifact for instructors, program managers, and online-learning platform operators.
 
